@@ -13,8 +13,8 @@
 </pre>
 ### FAIRE
 ### FAIT
-<pre>
-    librairie ![ADIOT_relay](https://github.com/AdriLighting/ADRIOT_relay)
-    librairie ![ADIOT_solMoisture](https://github.com/AdriLighting/ADRIOT_solMoisture)
-    -librairie ![ADIOT_dht22](https://github.com/AdriLighting/ADRIOT_dht22)
-</pre>
+librairie ![ADIOT_relay](https://github.com/AdriLighting/ADRIOT_relay)<br />
+librairie ![ADIOT_solMoisture](https://github.com/AdriLighting/ADRIOT_solMoisture)<br />
+librairie ![ADIOT_dht22](https://github.com/AdriLighting/ADRIOT_dht22)<br />
+
+
