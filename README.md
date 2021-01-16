@@ -14,8 +14,8 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 </pre>
 ### FAIRE
 ### FAIT
-* librairie ADIOT<br />
-* librairie ![ADIOT_relay](https://github.com/AdriLighting/ADRIOT_relay)<br />
-* librairie ![ADIOT_solMoisture](https://github.com/AdriLighting/ADRIOT_solMoisture)<br />
-* librairie ![ADIOT_dht22](https://github.com/AdriLighting/ADRIOT_dht22)<br />
+* librairie ADRIOT<br />
+* librairie ![ADRIOT_relay](https://github.com/AdriLighting/ADRIOT_relay)<br />
+* librairie ![ADRIOT_solMoisture](https://github.com/AdriLighting/ADRIOT_solMoisture)<br />
+* librairie ![ADRIOT_dht22](https://github.com/AdriLighting/ADRIOT_dht22)<br />
 
