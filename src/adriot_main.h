@@ -9,8 +9,8 @@
 
 	public:
 		relayManagement * _relayManagment;
-		
-		adriot_main();
+		wifiClass 		* _wifi;
+		adriot_main(const char * hName);
 		~adriot_main(){};
 		
 	};
