@@ -37,7 +37,9 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     ----  
 </pre>
 ### FAIRE
+<pre>
     module wemos d1 pro+oledi2c
+</pre>    
 ### FAIT
 <pre>
     network function
