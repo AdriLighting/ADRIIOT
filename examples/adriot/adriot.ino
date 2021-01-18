@@ -27,22 +27,26 @@ dht22Class 			sensor_temperature(D2);
 
 void setup()
 {
+
+
 	Serial.begin(115200);
   	for(unsigned long const serialBeginTime = millis(); !Serial && (millis() - serialBeginTime > 5000); ) { }
 
+
 	LittleFS.begin();
+
 
   	#ifdef DEBUG
   		fsprintf("\n[ADRIOT BEGIN]\n");	
   	#endif
 	adriotMain = new adriot_main((char *)"ADRIOT");
 
+
 	_wifi 		= wifiClassPtr_get();
 	_webServer 	= ALS_espwebserverPtr_get();
 
 	#ifdef DEBUG
 		fsprintf("\n[ADRIOT WIFI SETUP]\n");	
-		
 	#endif
 	if (!_wifi->_setupFromSpiff()) { 
 		_wifi->_setupAp(AWC_SETUP, AWCS_AP);
@@ -51,6 +55,7 @@ void setup()
 		_wifi->_connect(AWC_SETUP);
 	}
 	wifi_connect_statu();
+
 
 	_webServer->serverFS(true); 	
 	_webServer->serverInitialize();
@@ -74,7 +79,7 @@ void setup()
 	timeDisplay = new adri_timer(1000,"",true);
 */
 
-	
+
 }
 
 
@@ -99,9 +104,9 @@ void loop()
 		_webServer->socketLoop();	
 
 		// if(timeDisplay->loop()){
-		// 	String ret = _wifi->ntpTime_toString(adri_timeNtp_instance()->timeget());	
-		// 	Serial.write(27);	
-		// 	fsprintf("\n[timer]%s\n", ret.c_str());	
+		// 	String ret;
+		// 	 _wifi->ntpTime_getTime(ret);	
+		// 	// fsprintf("\n[timer]%s\n", ret.c_str());	
 		// }			
 	}	
 	

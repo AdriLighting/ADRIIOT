@@ -7,12 +7,26 @@
 	class adriot_main
 	{
 
-	public:
-		relayManagement 	* _relayManagment;
-		wifiClass 			* _wifi;
-		ALS_espwebserver 	* _webServer;
-		adriot_main(const char * hName);
-		~adriot_main(){};
+		public:
+			relayManagement 	* _relayManagment;
+			wifiClass 			* _wifi;
+			ALS_espwebserver 	* _webServer;
+			adriot_main(const char * hName);
+			~adriot_main(){};
 		
+	};
+
+	class adriot_module
+	{
+		enum module{
+			solMoisture,
+			relay,
+			temperature
+		};
+		
+		public:
+			adriot_module();
+			~adriot_module();
+			
 	};
 #endif // ADRIOT_MAIN_H

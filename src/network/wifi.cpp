@@ -262,7 +262,7 @@ void wifiClass::ntpTime_getTime(String & ret) {
 		time	= adri_timeNtp_instance()->timeget();
 		ret 	= ntpTime_toString(time);	   		
    	} else {
-   		ret = on_time();					 
+   		ret = "";					 
    	}
 }
 String wifiClass::ntpTime_toString(time_t t) {
