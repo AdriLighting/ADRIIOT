@@ -1,23 +1,29 @@
 
+
 #include <ADRIOT.h>
 #include <adri_tools.h>
-#include <adri_espwebserver.h>
+
 
 #define DEBUG
 
-adriot_main * adriotMain;
 
-solmoistureClass * sensorSolMoisture;
+adriot_main 		* adriotMain;
+adri_webserver		clientServer(80);
+adri_socket			socketServer(81);
+adri_timer 			* timeDisplay 			= nullptr;
+wifiClass 			* _wifi;
+ALS_espwebserver	* _webServer;
 
-int		relayPump 				= -1;
-boolean relayPump_statu 		= false;
-boolean sensorSolMoisture_cap 	= false;
 
-dht22Class sensor_temperature(D2);
+solmoistureClass 	* sensorSolMoisture 	= nullptr;
+boolean 			sensorSolMoisture_cap 	= false;
 
-adri_webserver		clientServer(80); // instance adri_webserver 	- ESP8266WebServer _server
+int					relayPump 				= -1;
+boolean 			relayPump_statu 		= false;
 
-adri_timer * timeDisplay;
+dht22Class 			sensor_temperature(D2);
+
+
 
 void setup()
 {
@@ -31,71 +37,84 @@ void setup()
   	#endif
 	adriotMain = new adriot_main((char *)"ADRIOT");
 
+	_wifi 		= wifiClassPtr_get();
+	_webServer 	= ALS_espwebserverPtr_get();
 
-
-	if (!wifiClassPtr_get()->_setupFromSpiff()) { 
-		// fsprintf("\n[_setupFromSpiff AWCS_AP]\n");	
-		wifiClassPtr_get()->_setupAp(AWC_SETUP, AWCS_AP);
-		wifiClassPtr_get()->_connect(AWC_SETUP);
+	#ifdef DEBUG
+		fsprintf("\n[ADRIOT WIFI SETUP]\n");	
+		
+	#endif
+	if (!_wifi->_setupFromSpiff()) { 
+		_wifi->_setupAp(AWC_SETUP, AWCS_AP);
+		_wifi->_connect(AWC_SETUP);
 	} else {
-		// fsprintf("\n[_setupFromSpiff AWC_SETUP]\n");	
-		wifiClassPtr_get()->_connect(AWC_SETUP);
+		_wifi->_connect(AWC_SETUP);
 	}
 	wifi_connect_statu();
 
-	clientServer.filesystem_ok(true); 		// ENABLED FILE SYSTEM BROWSER
-	clientServer.filesystem_set(&LittleFS);
+	_webServer->serverFS(true); 	
+	_webServer->serverInitialize();
+	_webServer->serverBegin();
+	_webServer->socketBegin();
 
-	clientServer.initialize(80);
-	clientServer.begin();
 
+/*
 	#ifdef DEBUG
 		fsprintf("\n[ADRIOT SOL MOISTURE BEGIN]\n");	
 	#endif
 	sensorSolMoisture = new solmoistureClass(false, A0);
-
+*/
+/*	
 	#ifdef DEBUG
 		fsprintf("\n[ADRIOT RELAY MOISTURE PUMP BEGIN]\n");	
 	#endif
 	adriotMain->_relayManagment->create(D2, relayPump);
-
+*/
+/*	
 	timeDisplay = new adri_timer(1000,"",true);
+*/
+
+	
 }
 
 
 void loop()
 {
-	wifiClassPtr_get()->_loop();
-	if (wifiClassPtr_get()->_connectMod == 1) {
-		wifiClassPtr_get()->_connectMod = 0;
-		wifiClassPtr_get()->_isConnect = true;		
+
+
+	_wifi->_loop();
+	if (_wifi->_connectMod == 1) {
+		_wifi->_connectMod = 0;
+		_wifi->_isConnect = true;
+		fsprintf("\n[_isConnect]\n");		
 	}
-	if (wifiClassPtr_get()->_isConnect) {
+	if (_wifi->_isConnect) {
 
-		wifiClassPtr_get()->ntpTime_loop();
+		_wifi->ntpTime_loop();
 
-		if(!wifiClassPtr_get()->_otaEnabled) 	wifiClassPtr_get()->MDSN_loop();
-		else 									arduinoOTA_loop();	
+		if(!_wifi->_otaEnabled)	_wifi->MDSN_loop();
+		else					arduinoOTA_loop();	
 
-		clientServer.handleLoop();	
+		_webServer->serverLoop();	
+		_webServer->socketLoop();	
 
 		// if(timeDisplay->loop()){
-		// 	String ret = wifiClassPtr_get()->ntpTime_toString(adri_timeNtp_instance()->timeget());	
+		// 	String ret = _wifi->ntpTime_toString(adri_timeNtp_instance()->timeget());	
 		// 	Serial.write(27);	
 		// 	fsprintf("\n[timer]%s\n", ret.c_str());	
 		// }			
 	}	
 	
 
-	// adriotMain->_wifi->loop();
-
-/*
-	relayPump_statu 		= adriotMain->_relayManagment->relay(relayPump)->getStatus();	
-	sensorSolMoisture->loop(sensorSolMoisture_cap);
-	if (sensorSolMoisture_cap) {
-		if (!relayPump_statu) 	adriotMain->_relayManagment->relay(relayPump)->open();
-	} else {
-		if (relayPump_statu) 	adriotMain->_relayManagment->relay(relayPump)->close();
+	if ((relayPump!=-1) && (sensorSolMoisture!=nullptr)) {
+		relayPump_statu 		= adriotMain->_relayManagment->relay(relayPump)->getStatus();	
+		sensorSolMoisture->loop(sensorSolMoisture_cap);
+		if (sensorSolMoisture_cap) {
+			if (!relayPump_statu) 	adriotMain->_relayManagment->relay(relayPump)->open();
+		} else {
+			if (relayPump_statu) 	adriotMain->_relayManagment->relay(relayPump)->close();
+		}		
 	}
-*/	
+
+
 }

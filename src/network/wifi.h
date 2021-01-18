@@ -1,42 +1,11 @@
 #ifndef WIFI_H
 	#define WIFI_H
+
 	#include <adri_wifiConnect.h>
 	#include <adri_tools.h>
 	#include <adri_timer.h>
-
-	// class wifiClass
-	// {
-
-	// 	wifiConnect 			* myWifi;	// PTR pour unr instance statique "wifiConnect"
-	// 	wifi_credential_ap		* myWifiAp;	// PTR pour unr instance statique "wifi_credential_ap"
-
-	// 	const char				* _hostname = "MY_WIFI"; 	// AP AND DNS HOSTNAME 
-			
-	// 	int 					_connectDone	= 0;			// WIFI CONNECT LOOP POSTION 
-
-	// public:
-
-	// 											// 	AWC_LOOP; 		WIFI CONNECT STARTUP WITH STATIC 
-	// 											// 	AWC_SETUP; 		WIFI CONNECT STARTUP WITH STATIC 
-	// 	WIFICONNECT_MOD			_connectMod 	= 	AWC_SETUP;	
-
-	// 											// 	AWCS_MULTI;		STA CONNECT WITH MULTIPLE SSID
-	// 											// 	AWCS_NORMAL;	STA CONNECT WITH THE SELECTED SSID
-	// 	WIFICONNECTSSID_MOD 	_SSIDMod 		= 	AWCS_NORMAL;	
-
-	// 	boolean 				_OTA 			= false; 	// ENABLED OTA
-
-	// 	wifiClass();
-	// 	~wifiClass(){};
-	// 	void setup(String ssid, String pswd, const char * host);
-	// 	void connect();
-	// 	void loop();
-	// };
-
 	#include <adri_espwebserver_tools.h>
-
-
-		#include <adri_timeNtp.h>
+	#include <adri_timeNtp.h>
 
 	enum mod_wifiConnect_error
 	{
@@ -93,3 +62,35 @@
 	wifiClass * wifiClassPtr_get();
 
 #endif // WIFI_H
+
+
+/*
+	class wifiClass
+	{
+
+		wifiConnect 			* myWifi;	// PTR pour unr instance statique "wifiConnect"
+		wifi_credential_ap		* myWifiAp;	// PTR pour unr instance statique "wifi_credential_ap"
+
+		const char				* _hostname = "MY_WIFI"; 	// AP AND DNS HOSTNAME 
+			
+		int 					_connectDone	= 0;			// WIFI CONNECT LOOP POSTION 
+
+	public:
+
+												// 	AWC_LOOP; 		WIFI CONNECT STARTUP WITH STATIC 
+												// 	AWC_SETUP; 		WIFI CONNECT STARTUP WITH STATIC 
+		WIFICONNECT_MOD			_connectMod 	= 	AWC_SETUP;	
+
+												// 	AWCS_MULTI;		STA CONNECT WITH MULTIPLE SSID
+												// 	AWCS_NORMAL;	STA CONNECT WITH THE SELECTED SSID
+		WIFICONNECTSSID_MOD 	_SSIDMod 		= 	AWCS_NORMAL;	
+
+		boolean 				_OTA 			= false; 	// ENABLED OTA
+
+		wifiClass();
+		~wifiClass(){};
+		void setup(String ssid, String pswd, const char * host);
+		void connect();
+		void loop();
+	};
+*/

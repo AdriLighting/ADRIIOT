@@ -19,3 +19,10 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 * librairie ![ADRIOT_solMoisture](https://github.com/AdriLighting/ADRIOT_solMoisture)<br />
 * librairie ![ADRIOT_dht22](https://github.com/AdriLighting/ADRIOT_dht22)<br />
 
+## 18/01/2021 01:51:36
+### Idée
+### FAIRE
+### FAIT
+* wifi.cpp
+* class adriot_main
+    * wifiClass

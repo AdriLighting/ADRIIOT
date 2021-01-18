@@ -108,7 +108,7 @@ boolean wifiClass::_setupAp(WIFICONNECT_MOD cMod, WIFICONNECTSSID_MOD sMod) {
 	hostName_set 				(_hostname);
 	setup_id();
 	wifi_credentialAp_ptr_get()->hostname_set(ch_toString(_hostname));
-	wifi_credentialAp_ptr_get()->psk_set("rgbw1234");
+	wifi_credentialAp_ptr_get()->psk_set("adriot1234");
 	wifi_credentialAp_ptr_get()->ip_set("192.168.4.1");
 	return true;
 }
