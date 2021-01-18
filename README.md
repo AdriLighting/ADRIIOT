@@ -22,28 +22,37 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ## 18/01/2021 01:51:36
 ### Idée
 <pre>
+    1 séléction des modules voulllu.
+    2 sauvegarde de la séléction
+    1 chargement de ma séméction des modules
+    ----
     modules dynamique
         relay
         solMoisture
     module statique
-        dht22        
+        dht22      
+    ----
+    openweather
+    database ....
+    ----  
 </pre>
 ### FAIRE
 ### FAIT
 <pre>
     network function
-            wifi connect 
+            wifi  
                 STA
-                    real-time NTP 
+                    NTP real-time  
                 STA || AP
-                    webserver
+                    webserver protocol
                         socket
                         http
+                        
     wifi.cpp
-        class wifiClass : public wifiConnect
+        class wifiClass : public wifiConnect 
     adriot_main.h    
         class adriot_main
-            ptr : wifiClass         * _wifi  
-            ptr : ALS_espwebserver  * _webServer
+            ptr : wifiClass         * _wifi         
+            ptr : ALS_espwebserver  * _webServer    (hhtp && socket)
         class adriot_module        
 </pre>
