@@ -28,4 +28,4 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     * ptr _wifi  
     * ptr _webServer  
         - server http 
-        - sserver socket 
+        - server socket 
