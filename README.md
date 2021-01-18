@@ -31,14 +31,19 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ### FAIRE
 ### FAIT
 <pre>
-wifi.cpp
-    class wifiClass : public wifiConnect
-adriot_main.h    
-    class adriot_main
-        ptr : wifiClass         * _wifi  
-
-        ptr : ALS_espwebserver  * _webServer
-                server http 
-                server socket 
+    network function
+            wifi connect 
+                STA
+                    real-time NTP 
+                STA || AP
+                    webserver
+                        socket
+                        http
+    wifi.cpp
+        class wifiClass : public wifiConnect
+    adriot_main.h    
+        class adriot_main
+            ptr : wifiClass         * _wifi  
+            ptr : ALS_espwebserver  * _webServer
         class adriot_module        
 </pre>
