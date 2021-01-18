@@ -47,5 +47,4 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
             ptr : ALS_espwebserver  * _webServer
         class adriot_module        
 
-        ...
 </pre>
