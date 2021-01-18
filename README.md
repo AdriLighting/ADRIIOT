@@ -25,4 +25,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ### FAIT
 * wifi.cpp
 * class adriot_main
-    * wifiClass
+    * ptr _wifi  
+    * ptr _webServer  
+        - server http 
+        - sserver socket 
