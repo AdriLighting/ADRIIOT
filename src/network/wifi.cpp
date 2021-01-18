@@ -1,5 +1,8 @@
 #include "wifi.h"
+
 #include <ESP8266HTTPClient.h>
+#include <adri_tools.h>
+
 
 wifiClass * wifiClass_ptr;
 wifiClass * wifiClassPtr_get(){

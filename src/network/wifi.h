@@ -1,12 +1,12 @@
 #ifndef WIFI_H
 	#define WIFI_H
 
-	#include <adri_wifiConnect.h>
-	#include <adri_tools.h>
 	#include <adri_timer.h>
-	#include <adri_espwebserver_tools.h>
+	#include <adri_wifiConnect.h>
 	#include <adri_timeNtp.h>
-	//WIFI.H
+	#include <adri_espwebserver_tools.h>
+
+	
 	enum mod_wifiConnect_error
 	{
 		mwce_none, mwce_setup
@@ -33,7 +33,7 @@
 		boolean					_otaEnabled 	= true;
 
 		wifiClass(const char * value);
-		~wifiClass(){fsprintf("\n[wifiClass delete();]\n");};
+		~wifiClass(){};
 
 		mod_wifiConnect_error error_get();
 		void 	_connectMod_set 	(int value);
