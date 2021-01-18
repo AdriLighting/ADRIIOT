@@ -33,7 +33,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
         dht22      
     ----
     openweather
-    database ....
+    database with graphic interface (agenda, stock de ressource, etc...)
     ----  
 </pre>
 ### FAIRE
