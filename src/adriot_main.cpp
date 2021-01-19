@@ -5,9 +5,10 @@
 relayManagement adriot_relayManagement;
 dht22Management adriot_dht22Management;
 
-
+adriot_main * adriot_mainPtr;
 adriot_main::adriot_main(const char * hName){
 	
+	adriot_mainPtr = this;
 
 	_relayManagment = &adriot_relayManagement;
 	_dht22Managment = &adriot_dht22Management;
@@ -40,6 +41,8 @@ adriot_main::adriot_main(const char * hName){
 	_webServer->socketBegin();
 
 
+
+
 }
 
 
@@ -62,4 +65,43 @@ void adriot_main::loop(){
 		_webServer->socketLoop();	
 	}		
 
+}
+
+
+
+adriot_module::adriot_module(mModule name, mType type, int pin){
+	_mName 	= name;
+	_mType 	= type;
+	_pin 	= pin;
+}
+void adriot_module::nameToString(mModule value, String & result){
+	switch (value) {
+	    case mn_solMoisture: 	result = "solMoisture";	break;
+	    case mn_relay:			result = "relay"; 		break;
+	    case mn_temperature: 	result = "temperature"; break;	      	
+	    default: 				result = ""; 			break;
+	}
+}
+void adriot_module::typeToString(mType value, String & result){
+	switch (value) {
+	    case mt_sensor:		result = "sensor";	break;
+	    case mt_relay: 		result = "relay";	break;
+	    default: 			result = "";		break;
+	}
+}
+
+void adriot_module::create(){
+	switch (_mName) {
+	    case mn_solMoisture:
+
+	      	break;
+	    case mn_relay:
+	    	adriot_mainPtr->_relayManagment->create(_pin, _id);
+	      	break;
+	    case mn_temperature:
+	    	
+	      	break;
+	    default:
+	    	break;
+	}
 }

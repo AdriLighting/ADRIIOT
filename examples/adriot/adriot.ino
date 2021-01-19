@@ -41,7 +41,7 @@ void setup()
 
 
 
-
+/*
 	#ifdef DEBUG
 		fsprintf("\n[ADRIOT SOL MOISTURE SENSOR BEGIN]\n");	
 	#endif
@@ -58,7 +58,7 @@ void setup()
 		fsprintf("\n[ADRIOT TEMPERATURE SENSOR BEGIN]\n");	
 	#endif
 	adriotMain->_dht22Managment->create(D2, sensorTemperature);
-
+*/
 /*	
 	timeDisplay = new adri_timer(1000,"",true);
 void loop()
@@ -68,6 +68,7 @@ void loop()
 }
 
 
+void loop()
 {
 
 

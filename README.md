@@ -72,13 +72,39 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ## 19/01/2021 01:33:51
 ### Idée
 <pre>
-
+    1 séléction des modules voulllu.
+    2 sauvegarde de la séléction
+    1 chargement de ma séméction des modules
+    ----
+    modules dynamique
+        relay
+        solMoisture
+        dht22      
+    ----
+    openweather
+    database with graphic interface (agenda, stock de ressource, etc...)
+    ---- 
 </pre>
 ### FAIRE
 <pre>
-
+    module wemos d1 pro + oledi2c + relay
 </pre>    
 ### FAIT
 <pre>
-     
+    class dht22Class
+        constructor dyname DHT
+    class adriot_main
+        dht22Management     * _dht22Managment;
+    class adriot_module
+        enum mModule
+        enum mType
+        mModule _mName  = mn_unk;
+        mType   _mType  = mt_unk;
+        int     _pin    = -1;
+        int     _id     = -1;
+        public:
+            adriot_module(mModule name, mType type, int pin);
+            void nameToString(mModule value, String & result); 
+            void typeToString(mType value, String & result); 
+            void create();
 </pre>
