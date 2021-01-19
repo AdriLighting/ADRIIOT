@@ -93,6 +93,18 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 <pre>
     class dht22Class
         constructor dyname DHT
+    class dht22Management
+        private:
+            int _pos = 0;
+        public:
+            dht22Management();
+            ~dht22Management(){};
+            void create             (int value, int & result);
+            void read_temperature   (float & result, boolean & isNan);
+            void read_temperature   (int pos, float & result, boolean & isNan);
+            void read_humidity      (float & result, boolean & isNan);
+            void read_humidity      (int pos, float & result, boolean & isNan);
+            dht22Class * dht22(int pos);
     class adriot_main
         dht22Management     * _dht22Managment;
     class adriot_module
