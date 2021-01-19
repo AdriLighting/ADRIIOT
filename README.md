@@ -2,6 +2,9 @@
 16/01/2021.<br />
 Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 
+<br />
+<hr>
+
 ## 16/01/2021 13:58:06
 ### Idée
 <pre>
@@ -18,6 +21,9 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 * librairie ![ADRIOT_relay](https://github.com/AdriLighting/ADRIOT_relay)<br />
 * librairie ![ADRIOT_solMoisture](https://github.com/AdriLighting/ADRIOT_solMoisture)<br />
 * librairie ![ADRIOT_dht22](https://github.com/AdriLighting/ADRIOT_dht22)<br />
+
+<br />
+<hr>
 
 ## 18/01/2021 01:51:36
 ### Idée
