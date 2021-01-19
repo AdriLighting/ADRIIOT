@@ -7,11 +7,12 @@
 #define DEBUG
 
 
-adriot_main 		* adriotMain;
 adri_webserver		clientServer(80);
 adri_socket			socketServer(81);
-adri_timer 			* timeDisplay 			= nullptr;
 
+adriot_main 		* adriotMain;
+
+adri_timer 			* timeDisplay 			= nullptr;
 
 solmoistureClass 	* sensorSolMoisture 	= nullptr;
 boolean 			sensorSolMoisture_cap 	= false;
@@ -19,9 +20,7 @@ boolean 			sensorSolMoisture_cap 	= false;
 int					relayPump 				= -1;
 boolean 			relayPump_statu 		= false;
 
-dht22Class 			sensor_temperature(D2);
-
-dht22Class * test;
+int					sensorTemperature		= -1;
 
 void setup()
 {
@@ -42,27 +41,33 @@ void setup()
 
 
 
-/*
+
 	#ifdef DEBUG
-		fsprintf("\n[ADRIOT SOL MOISTURE BEGIN]\n");	
+		fsprintf("\n[ADRIOT SOL MOISTURE SENSOR BEGIN]\n");	
 	#endif
 	sensorSolMoisture = new solmoistureClass(false, A0);
-*/
-/*	
+
+	
 	#ifdef DEBUG
-		fsprintf("\n[ADRIOT RELAY MOISTURE PUMP BEGIN]\n");	
+		fsprintf("\n[ADRIOT MOISTURE PUMP RELAY BEGIN]\n");	
 	#endif
 	adriotMain->_relayManagment->create(D2, relayPump);
-*/
+
+	
+	#ifdef DEBUG
+		fsprintf("\n[ADRIOT TEMPERATURE SENSOR BEGIN]\n");	
+	#endif
+	adriotMain->_dht22Managment->create(D2, sensorTemperature);
+
 /*	
 	timeDisplay = new adri_timer(1000,"",true);
+void loop()
 */
 
 
 }
 
 
-void loop()
 {
 
 

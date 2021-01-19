@@ -10,10 +10,14 @@
 
 		public:
 			relayManagement 	* _relayManagment;
+			dht22Management 	* _dht22Managment;
+
 			wifiClass 			* _wifi;
 			ALS_espwebserver 	* _webServer;
+
 			adriot_main(const char * hName);
 			~adriot_main(){};
+			
 			void loop();
 		
 	};

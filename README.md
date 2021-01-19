@@ -65,3 +65,20 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
             ptr : ALS_espwebserver  * _webServer    (hhtp && socket)
         class adriot_module        
 </pre>
+
+<br />
+<hr>
+
+## 19/01/2021 01:33:51
+### Idée
+<pre>
+
+</pre>
+### FAIRE
+<pre>
+
+</pre>    
+### FAIT
+<pre>
+     
+</pre>
