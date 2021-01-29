@@ -13,12 +13,11 @@ wifiClass::wifiClass(const char * value) : wifiConnect(){
 	_checkConnected_timer 	= new adri_timer(180000, 	"", false);
 	_connectModTimer 		= new adri_timer(2000, 		"", false);
 	_hostname 				= value;
+	_connectMod 			= 0;
 	new wifi_credential_ap("");
 	_ntpTime 				= new adri_timeNtp();
 	
 }
-
-
 
 
 mod_wifiConnect_error wifiClass::error_get() {
@@ -56,7 +55,7 @@ boolean wifiClass::_setup(WIFICONNECT_MOD cMod, WIFICONNECTSSID_MOD sMod) {
 	station_set 				(WIFI_STA);
 	hostName_set 				(_hostname);
 	setup_id					();
-	print_cfg 					();
+	// print_cfg 					();
 
 	// if (!_ap->load_fromSpiif()) {
 	wifi_credentialAp_ptr_get()->hostname_set(ch_toString(_hostname));
@@ -146,6 +145,17 @@ boolean wifiClass::_connect(WIFICONNECT_MOD cMod) {
 		_connectMod_setTo 	= 2;
 	}
 	return true;
+}
+void wifiClass::_connect_arduinoIOT(){
+	if (wifi_connect_result("") ) {
+		
+		if(!_otaEnabled)	MDSN_begin			();
+		else 				arduinoOTA_setup	(_hostname);
+
+		ntpTime_setup();
+
+				
+	}
 }
 boolean wifiClass::_connectFromSpiff() {
 

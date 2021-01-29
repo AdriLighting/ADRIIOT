@@ -1,3 +1,4 @@
 *.driveupload
 desktop.ini
 secret.h
+thingProperties.h

@@ -107,16 +107,48 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
             dht22Class * dht22(int pos);
     class adriot_main
         dht22Management     * _dht22Managment;
-    class adriot_module
-        enum mModule
-        enum mType
-        mModule _mName  = mn_unk;
-        mType   _mType  = mt_unk;
-        int     _pin    = -1;
-        int     _id     = -1;
+    class moduleClass
+            mModule     _mName  = mn_unk;
+            mType       _mType  = mt_unk;
+            int         _pin    = -1;
         public:
-            adriot_module(mModule name, mType type, int pin);
+            int         _id     = -1;
+            moduleClass(mModule name, int pin);
             void nameToString(mModule value, String & result); 
             void typeToString(mType value, String & result); 
             void create();
+    class moduleManagment
+        private:
+            int _pos = 0;
+        public:
+            moduleManagment();
+            ~moduleManagment(){};
+            void create (mModule name, int pin, int & result);
+            void create (mModule name, int pin);
+            moduleClass * module(int pos);
+            void toggleRelay(unsigned long delay);
+</pre>
+## 20/01/2021 09:33:51
+### Idée
+<pre>
+    1 séléction des modules voulllu.
+    2 sauvegarde de la séléction
+    1 chargement de ma séméction des modules
+    ----
+    modules dynamique
+        relay
+        solMoisture
+        dht22      
+    ----
+    openweather
+    database with graphic interface (agenda, stock de ressource, etc...)
+    ---- 
+</pre>
+### FAIRE
+<pre>
+    module wemos d1 pro + oledi2c + relay
+</pre>    
+### FAIT
+<pre>
+
 </pre>

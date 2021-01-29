@@ -14,7 +14,6 @@
 
 	class wifiClass : public wifiConnect
 	{
-		const char 				* _hostname 			= "HELLOWORLD";
 
 		mod_wifiConnect_error 	_error_setup 			= mwce_none;
 
@@ -26,7 +25,7 @@
 		adri_timeNtp			* _ntpTime;
 
 	public:
-
+		const char 				* _hostname 			= "HELLOWORLD";
 		boolean 				_isConnect 		= false;
 		int 					_connectMod		= 0;
 		int						_eventModStart	= 0;
@@ -44,6 +43,7 @@
 		boolean _setup 				(WIFICONNECT_MOD cMod = AWC_SETUP, WIFICONNECTSSID_MOD sMod = AWCS_NORMAL);
 		boolean _setupAp			(WIFICONNECT_MOD cMod = AWC_SETUP, WIFICONNECTSSID_MOD sMod = AWCS_NORMAL);
 		boolean _connect 			(WIFICONNECT_MOD cMod);
+		void 	_connect_arduinoIOT ();
 		boolean _connectFromSpiff	();
 		void 	_loop 				();
 
