@@ -125,3 +125,30 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
                 chargement via spiff
 
 </pre>
+## 29/01/2021 02:37:53
+### Idée
+<pre>
+    1 séléction des modules voulllu.
+    2 sauvegarde de la séléction
+    1 chargement de ma séméction des modules
+    ----
+    modules dynamique
+        relay
+        soilmoisture
+        dht22      
+    ----
+    openweather
+    database with graphic interface (agenda, stock de ressource, etc...)
+    ---- 
+</pre>
+### FAIRE
+<pre>
+    module wemos d1 pro + oledi2c + relay
+</pre>    
+### FAIT
+adriiot_soilmoisture)<br />
+* librairie ![adri_tools_v2](https://github.com/AdriLighting/adri_tools_v2)<br 
+<pre>
+    debugger-logger
+    
+</pre>
