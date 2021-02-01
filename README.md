@@ -155,7 +155,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 </pre>    
 ### FAIT
 adriiot_soilmoisture)<br />
-* librairie ![adri_tools_v2](https://github.com/AdriLighting/adri_tools_v2)<br 
+* librairie ![adri_tools_v2](https://github.com/AdriLighting/adri_tools_v2)
 <pre>
     debugger-logger
     
