@@ -92,7 +92,7 @@ void setup()
 //					
 //											RELAY POUR CONTROLLER UN ECLAIRAGE 0/220	
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led",			1); 			// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_light(			2,		"blue_led", 		1		); 															// 1 |LEDS BUIT-IN BLUE
+	adriiotMain->_moduleManagment->create_light(			2,	"blue_led", 		1		); 															// 1 |LEDS BUIT-IN BLUE
 
 // 											CONTROLLER UN ECLAIRAGE AVEC VARIATION DE LA LUMINOSITÉE PAR RELAY OU AUTRE
 //	adriiotMain->_moduleManagment->create(	mn_light, 	mt_lightDimmer,	rt_unk,			st_unk, 			16,		"red_led",			2); 			// 0 |CREATE WITH MOD
@@ -106,7 +106,7 @@ void setup()
 	adriiotMain->_moduleManagment->create_temperature(	4,		"chambre d'adri", 	3 		); 															// 1 |DHT22
 	                                                 	   		                  	  		   															// 
 //	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_ds18b20,			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_temperatureEx(	5, 		"ds2812b", 			6 		); 															// 1 |DS18B20 	
+	adriiotMain->_moduleManagment->create_temperatureEx(	5,	"ds2812b", 			6 		); 															// 1 |DS18B20 	
 
 // 											RELAY POUR CONTROLLER UNE PRISE 0/220
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_plug, 		st_unk, 			D5,		"prise",			4);				// 0 |CREATE WITH MOD
@@ -149,9 +149,6 @@ void loop()
 	_serial->loop();
 
 	adriiotMain->loop();
-
-	
-
 
 	#if MQTT == adriiot_UNOIOT
 		ArduinoCloud.update();	
