@@ -85,6 +85,9 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ### FAIT
 <pre>
 
+<br />
+<hr>
+
 </pre>
 ## 29/01/2021 02:37:53
 ### Idée
@@ -125,6 +128,10 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
                 chargement via spiff
 
 </pre>
+
+<br />
+<hr>
+
 ## 01/02/2021 11:51:07
 ### Idée
 <pre>
@@ -144,6 +151,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ### FAIRE
 <pre>
     module wemos d1 pro + oledi2c + relay
+    trouver un system de requette pour domoticz+socket/http+udp
 </pre>    
 ### FAIT
 adriiot_soilmoisture)<br />
