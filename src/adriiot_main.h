@@ -1,16 +1,16 @@
 
 
-#ifndef ADRIOT_MAIN_H
-#define ADRIOT_MAIN_H
+#ifndef adriiot_MAIN_H
+#define adriiot_MAIN_H
 	#include <Arduino.h>
-	#include "adriot_lib.h"
+	#include "adriiot_lib.h"
 
 	#include <ArduinoJson.h>
-	#include <adri_tools.h>
+	#include <adri_tools_v2.h>
 
-#include <ESP8266WiFi.h>
-#include <PubSubClient.h>
-extern PubSubClient PubSubClient_client;
+	#include <ESP8266WiFi.h>
+	#include <PubSubClient.h>
+// extern PubSubClient PubSubClient_client;
 	#define MAX_MODULE 10
 	void PubSubClient_reconnect();
 	enum mModule{
@@ -33,8 +33,9 @@ extern PubSubClient PubSubClient_client;
 		rt_unk
 	};
 	enum sensorType{
-		st_solMoisture,
+		st_soilmoisture,
 		st_dht22,
+		st_ds18b20,
 		st_unk
 	};	
 	class moduleClass
@@ -53,7 +54,7 @@ extern PubSubClient PubSubClient_client;
 
 			moduleClass(mModule name, mType module_type, relayType relay_type, int pin, String username);
 			moduleClass(mModule name, mType module_type, relayType relay_type, sensorType sType, int pin, String username);
-			// ~adriot_module();
+			// ~adriiot_module();
 
 			void id_get(int & ret);
 			void nameId_get(int & ret);
@@ -95,12 +96,13 @@ extern PubSubClient PubSubClient_client;
 
 
 			void create(mModule mName, mType moType, relayType rType, sensorType sType, int pin, String username, int idx = -1);
-			void create_lightDimmer	(int pin, String username, int idx = -1);
-			void create_temperature	(int pin, String username, int idx = -1);
-			void create_plug 		(int pin, String username, int idx = -1);
-			void create_light 		(int pin, String username, int idx = -1);
-			void create_light 		(mType type, int pin, String username, int idx = -1);
-			void create_sensor		(sensorType type, int pin, String username, int idx = -1);
+			void create_lightDimmer		(int pin, String username, int idx = -1);
+			void create_temperature		(int pin, String username, int idx = -1);
+			void create_temperatureEx	(int pin, String username, int idx = -1);
+			void create_plug 			(int pin, String username, int idx = -1);
+			void create_light 			(int pin, String username, int idx = -1);
+			void create_light 			(mType type, int pin, String username, int idx = -1);
+			void create_sensor			(sensorType type, int pin, String username, int idx = -1);
 
 
 			moduleClass * module(int pos);
@@ -152,63 +154,80 @@ extern PubSubClient PubSubClient_client;
 
 // ############################################
 
-	class adriot_mqtt
+	class adriiot_mqtt
 	{
-		const char * _topicin	= "in";
-		const char * _topicout  = "out";
-		const char * _serverIp  = "out";
+		const char 		* _topicin		= "in";
+		const char 		* _topicout  	= "out";
+		const char 		* _serverIp  	= "out";
+		PubSubClient 	* 	_client;
+		uint16_t		_serverPort 	= 1883;
 	public:
-		adriot_mqtt(const char * topicin, const char * topicout, const char * serverIp);
-		~adriot_mqtt(){};
-		
+		adriiot_mqtt(const char * topicin, const char * topicout, const char * serverIp);
+		~adriiot_mqtt(){};
+
+		void connect();
+		void reconnect();
+		void loop();
+		void publish(const char* payload);
+		void publish(String jsonStr);
 	};
 
 
-	extern relayManagment			adriot_relayManagement;
-	extern dht22Managment			adriot_dht22Management;
-	extern solmoistureManagment		adriot_solmoistureManagment;
+	extern relayManagment			adriiot_relayManagement;
+	extern dht22Managment			adriiot_dht22Management;
+	extern soilmoistureManagment		adriiot_soilmoistureManagment;
 
-	extern moduleManagment			adriot_moduleManagemnt;
+	extern moduleManagment			adriiot_moduleManagemnt;
 
 	extern adri_timer 				* timer_test;
-	// extern adriot_main 				* adriot_mainPtr;
+	// extern adriiot_main 				* adriiot_mainPtr;
 
-	void adriot_print_SPIFF(String path = "");
+	void adriiot_print_SPIFF(String path = "");
 
 	extern adri_socket				socketServer;
 	void _whenWebsocketIsConnect();
 
-	class adriot_main
+	class adriiot_main
 	{
 
 		public:
 			relayManagment 			* _relayManagment;
 			dht22Managment 			* _dht22Managment;
 			moduleManagment 		* _moduleManagment;
-			solmoistureManagment 	* _solmoistureManagment;
+			soilmoistureManagment 	* _soilmoistureManagment;
+			DS18B20Managment 		* _ds18b20managment;
 
 			wifiClass 				* _wifi;
 			ALS_espwebserver 		* _webServer 	= nullptr;
-			adriot_mqtt 			* _adriot_mqtt 	= nullptr;
+			adriiot_mqtt 			* _adriiot_mqtt 	= nullptr;
+
+			adriTools_logger 		* _looger;
+			adri_toolsV2 			* _tools;
 
 			boolean 				_isArduinoIOT = false;
 			boolean 				_isArdiotMQTT = false;
 
-			adriot_main(
+			adriiot_main(
 					const char * hName,
 					boolean arduinoIOT = false, 
-					boolean adriotMQTT = false, 
+					boolean adriiotMQTT = false, 
 					const char * topicin = "", 
 					const char * topicout = "", 
 					const char * serverIp = ""
 				);
-			~adriot_main(){};
+			~adriiot_main(){};
 
-			void adriot_main_setPtr(adriot_main * ptr);
+			void adriiot_main_setPtr(adriiot_main * ptr);
 
 			void 	wifiConnect(String ssid, String psk);
 			boolean wifiIsConnect();
 
+			void 	socket_send(String msg);
+			void 	mqqt_send(String msg);
+			void 	dashboard_webClient_update(String msg);
+			void 	dashboard_webClient_update(int pos);
+
+			
 			void loop(){
 
 				
@@ -240,7 +259,7 @@ extern PubSubClient PubSubClient_client;
 					}
 					
 					int freeHeap = ESP.getFreeHeap();
-					fsprintf("\n[freeHeap] %d", freeHeap);
+					fsprintf("\n[freeHeap] %d\n", freeHeap);
 					
 					_wifi->_connectMod = 0;
 					_wifi->_isConnect = true;
@@ -248,10 +267,7 @@ extern PubSubClient PubSubClient_client;
 
 				if (_wifi->_isConnect) {
 
-					if (!PubSubClient_client.connected()) {
-						PubSubClient_reconnect();
-					}
-					PubSubClient_client.loop();
+					_adriiot_mqtt->loop();
 
 					_moduleManagment->modulesValue_check();
 
@@ -270,5 +286,6 @@ extern PubSubClient PubSubClient_client;
 		
 	};
 
-
-#endif // ADRIOT_MAIN_H
+	String _serial_logger_region(String cmd, String value);
+	String _serial_logger(String cmd, String value);
+#endif // adriiot_MAIN_H

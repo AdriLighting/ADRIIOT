@@ -1,7 +1,7 @@
 #include "wifi.h"
 
 #include <ESP8266HTTPClient.h>
-#include <adri_tools.h>
+#include <adri_tools_v2.h>
 
 
 wifiClass * wifiClass_ptr;
@@ -28,7 +28,7 @@ int 	wifiClass::_connectMod_get	() 				{ return _connectMod; }
 
 void 	wifiClass::_connectMod_set	(int value) 	{ _connectMod = value; }
 
-void 	wifiClass::_hostname_get		(String & ret) 	{ ret = ch_toString(_hostname);}	
+void 	wifiClass::_hostname_get		(String & ret) 	{ ret = adri_toolsv2Ptr_get()->ch_toString(_hostname);}	
 
 void 	wifiClass::_otaEnabled_set 	(boolean ret)	{ _otaEnabled = ret;}
 
@@ -58,8 +58,8 @@ boolean wifiClass::_setup(WIFICONNECT_MOD cMod, WIFICONNECTSSID_MOD sMod) {
 	// print_cfg 					();
 
 	// if (!_ap->load_fromSpiif()) {
-	wifi_credentialAp_ptr_get()->hostname_set(ch_toString(_hostname));
-	wifi_credentialAp_ptr_get()->psk_set("adriot1234");
+	wifi_credentialAp_ptr_get()->hostname_set(adri_toolsv2Ptr_get()->ch_toString(_hostname));
+	wifi_credentialAp_ptr_get()->psk_set("adriiot1234");
 	wifi_credentialAp_ptr_get()->ip_set("192.168.4.1");
 	// wifi_credentialAp_ptr_get()->print();
 	return true;
@@ -80,15 +80,15 @@ boolean wifiClass::_setupFromSpiff() {
 		wifi_credential_sta_toSpiff(); 
 	}	
 	if (!wifiConnect_load_fromSPIFF(s))				return false;
-	if (literal_value("connectSSID", s) == "ap") 	return false;
-	// fsprintf("\n[_setupFromSpiff connectSSID]%s\n", literal_value("connectSSID", s).c_str());
-	// fsprintf("\n[_setupFromSpiff connect]%s\n", 	literal_value("connect", s).c_str());
-	if (literal_value("connectSSID", s) == "loop") {
+	if (adri_toolsv2Ptr_get()->literal_value("connectSSID", s) == "ap") 	return false;
+	// fsprintf("\n[_setupFromSpiff connectSSID]%s\n", adri_toolsv2Ptr_get()->literal_value("connectSSID", s).c_str());
+	// fsprintf("\n[_setupFromSpiff connect]%s\n", 	adri_toolsv2Ptr_get()->literal_value("connect", s).c_str());
+	if (adri_toolsv2Ptr_get()->literal_value("connectSSID", s) == "loop") {
 		connect_set 	(AWC_LOOP);
 		connectSSID_set (AWCS_NORMAL);
 		if (!_setup(AWC_LOOP, AWCS_NORMAL)) return false;
 	}
-	else if (literal_value("connectSSID", s) == "setup") {
+	else if (adri_toolsv2Ptr_get()->literal_value("connectSSID", s) == "setup") {
 		connect_set 	(AWC_SETUP);
 		connectSSID_set (AWCS_NORMAL);		
 		if (!_setup(AWC_SETUP, AWCS_NORMAL)) return false;
@@ -109,8 +109,8 @@ boolean wifiClass::_setupAp(WIFICONNECT_MOD cMod, WIFICONNECTSSID_MOD sMod) {
 	station_set 				(WIFI_STA);
 	hostName_set 				(_hostname);
 	setup_id();
-	wifi_credentialAp_ptr_get()->hostname_set(ch_toString(_hostname));
-	wifi_credentialAp_ptr_get()->psk_set("adriot1234");
+	wifi_credentialAp_ptr_get()->hostname_set(adri_toolsv2Ptr_get()->ch_toString(_hostname));
+	wifi_credentialAp_ptr_get()->psk_set("adriiot1234");
 	wifi_credentialAp_ptr_get()->ip_set("192.168.4.1");
 	return true;
 }
@@ -251,8 +251,8 @@ void wifiClass::_checkConnected_loop(){
 	// 		fsprintf("\n%s\n", buffer);
 
 	// 		String logStr = "";
-	// 		adri_toolsPtr_get()->log_read(logStr, false);
-	// 		adri_toolsPtr_get()->log_write(logStr, timeStamp, String(buffer));		
+	// 		adri_toolsv2Ptr_get()()->log_read(logStr, false);
+	// 		adri_toolsv2Ptr_get()()->log_write(logStr, timeStamp, String(buffer));		
 					
 	// 		ESP.restart();
 					
@@ -308,7 +308,7 @@ wifiClass::wifiClass(){
 }
 void wifiClass::setup(String ssid, String pswd, const char * host){
 	_hostname = host;
-	myWifiAp->hostname_set(ch_toString(_hostname));
+	myWifiAp->hostname_set(adri_toolsv2Ptr_get()->ch_toString(_hostname));
 	wifi_credential_ap_register(myWifiAp);
 
 	wifi_credential_sta_fromSPIFF();

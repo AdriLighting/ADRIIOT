@@ -1,5 +1,5 @@
-#ifndef ADRIOT_ARDUINOIOT_H
-	#define ADRIOT_ARDUINOIOT_H
+#ifndef ADRIIOT_ARDUINOIOT_H
+	#define ADRIIOT_ARDUINOIOT_H
 
 	#include <ArduinoIoTCloud.h>
 	#include <Arduino_ConnectionHandler.h>
@@ -17,4 +17,4 @@
 	float 		aic_temperature	= 1;
 	boolean 	aic_relay 		= true;
 	
-#endif // ADRIOT_ARDUINOIOT_H
+#endif // adriiot_ARDUINOIOT_H

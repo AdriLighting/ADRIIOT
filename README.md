@@ -1,4 +1,4 @@
-# ADRIOT
+# adriiot
 16/01/2021.<br />
 Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 
@@ -17,10 +17,10 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 </pre>
 ### FAIRE
 ### FAIT
-* librairie ADRIOT<br />
-* librairie ![ADRIOT_relay](https://github.com/AdriLighting/ADRIOT_relay)<br />
-* librairie ![ADRIOT_solMoisture](https://github.com/AdriLighting/ADRIOT_solMoisture)<br />
-* librairie ![ADRIOT_dht22](https://github.com/AdriLighting/ADRIOT_dht22)<br />
+* librairie adriiot<br />
+* librairie ![adriiot_relay](https://github.com/AdriLighting/adriiot_relay)<br />
+* librairie ![adriiot_soilmoisture](https://github.com/AdriLighting/adriiot_soilmoisture)<br />
+* librairie ![adriiot_dht22](https://github.com/AdriLighting/adriiot_dht22)<br />
 
 <br />
 <hr>
@@ -34,7 +34,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     ----
     modules dynamique
         relay
-        solMoisture
+        soilmoisture
     module statique
         dht22      
     ----
@@ -71,7 +71,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     ----
     modules dynamique
         relay
-        solMoisture
+        soilmoisture
         dht22      
     ----
     openweather
@@ -95,7 +95,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     ----
     modules dynamique
         relay
-        solMoisture
+        soilmoisture
         dht22      
     ----
     openweather
