@@ -1,14 +1,16 @@
 // region ################################################ CONSTRUCTOR
-moduleClass::moduleClass(mModule name, mType module_type, relayType relay_type, int pin, String username){
-	_nameId = adriiot_moduleManagemnt.currentCnt();
-	_name 	= username;
-	_mName 	= name;	
-	_mType 	= module_type;	
-	_rType 	= relay_type;	
-	_pin 	= pin;
+moduleClass::moduleClass(mModule mName, mType moType, relayType rType, sensorType sType, int pin, int numLeds, String username){
+	_nameId 	= adriiot_moduleManagemnt.currentCnt();
+	_name 		= username;
+	_mName 		= mName;	
+	_mType 		= moType;	
+	_rType 		= rType;	
+	_sType 		= sType;	
+	_pin 		= pin;
+	_numLeds	= numLeds;
 
 	create();
-}
+}	
 moduleClass::moduleClass(mModule mName, mType moType, relayType rType, sensorType sType, int pin, String username){
 	_nameId = adriiot_moduleManagemnt.currentCnt();
 	_name 	= username;
@@ -83,10 +85,10 @@ void moduleClass::print(){
 	    	}
 	    break;
 	    case mt_lightDimmer:
-			adriiot_mainPtr->_relayManagment->module(_id)->getStatus(state);
+			adriiot_mainPtr->_lightDimmerManagment->module(_id)->getStatus(state);
 	    break; 
 	    case mt_lightRGB:
-			adriiot_mainPtr->_relayManagment->module(_id)->getStatus(state);
+			adriiot_mainPtr->_RGBneoManagment->module(_id)->getStatus(state);
 	    break;	   
 	    case mt_lightRGBW:
 			adriiot_mainPtr->_relayManagment->module(_id)->getStatus(state);
@@ -132,10 +134,10 @@ void moduleClass::create(){
 	    	adriiot_mainPtr->_relayManagment->create(_pin, _id);
 	    break;
 	    case mt_lightDimmer:
-	    	adriiot_mainPtr->_relayManagment->create(_pin, _id);
+	    	adriiot_mainPtr->_lightDimmerManagment->create(_pin, _id);
 	    break; 
 	    case mt_lightRGB:
-	    	adriiot_mainPtr->_relayManagment->create(_pin, _id);
+	    	adriiot_mainPtr->_RGBneoManagment->create(_id, _numLeds, _pin, 0);
 	    break;	   
 	    case mt_lightRGBW:
 	    	adriiot_mainPtr->_relayManagment->create(_pin, _id);
@@ -195,11 +197,10 @@ void moduleClass::json_domoticz_value(JsonObject & object){
 	    	}	    
 	    break;
 	    case mt_lightDimmer:
-	    	object[F("command")] = F("switchlight");
-			adriiot_mainPtr->_relayManagment->module(_id)->domoticzJson(object);
+			adriiot_mainPtr->_lightDimmerManagment->module(_id)->domoticzJson(object);
 	    break; 
 	    case mt_lightRGB:
-			adriiot_mainPtr->_relayManagment->module(_id)->domoticzJson(object);
+			adriiot_mainPtr->_RGBneoManagment->module(_id)->domoticzJson(object);
 	    break;	   
 	    case mt_lightRGBW:
 			adriiot_mainPtr->_relayManagment->module(_id)->domoticzJson(object);
@@ -234,10 +235,10 @@ void moduleClass::json_value(JsonObject & root){
 	    	adriiot_mainPtr->_relayManagment->module(_id)->json(object);
 	    break;
 	    case mt_lightDimmer:
-	    	adriiot_mainPtr->_relayManagment->module(_id)->json(object);
+	    	adriiot_mainPtr->_lightDimmerManagment->module(_id)->json(object);
 	    break; 
 	    case mt_lightRGB:
-	    	adriiot_mainPtr->_relayManagment->module(_id)->json(object);
+	    	adriiot_mainPtr->_RGBneoManagment->module(_id)->json(object);
 	    break;	   
 	    case mt_lightRGBW:
 	    	adriiot_mainPtr->_relayManagment->module(_id)->json(object);
@@ -258,5 +259,6 @@ void moduleClass::json(JsonObject & root){
 	object[F("5")] 	= _sType;
 	object[F("6")] 	= _pin;
 	object[F("7")] 	= _id;
+	object[F("8")] 	= _numLeds;
 }	
 // endregion >>>>  GET MODULE INFOS AS JSON  - SOCKET

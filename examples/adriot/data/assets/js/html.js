@@ -34,9 +34,9 @@ function card_switch_plug_home(nbr_id, card_title){
   html += '                    </div>' + "\n";
   return html;
 }
-function card_switch(nbr_id, card_title, card_slider, name, ico){
+function card_switch(nbr_id, card_title, card_slider, name, ico, rgbPicker){
   html = "";
-  html += '              <div id="switch-card-'+nbr_id+'" class="col-sm-12 col-md-6 col-xl-4" style="display:none">' + "\n";
+  html += '              <div id="switch-card-'+nbr_id+'" class="col-sm-12 col-md-6 col-xl-4" style="display:">' + "\n";
   html += '                <!-- Light unit START -->' + "\n";
   html += '                <div class="card active" data-unit="switch-'+name+'-'+nbr_id+'">' + "\n";
   html += '                  <!-- Light switch START -->' + "\n";
@@ -75,16 +75,39 @@ function card_switch(nbr_id, card_title, card_slider, name, ico){
   html += '                  <ul class="list-group borderless px-1" data-rangeslider="dimmer-'+name+'-'+nbr_id+'">' + "\n";
   html += '                    <li class="list-group-item">' + "\n";
   html += '                      <p class="specs">Dim</p>' + "\n";
-  html += '                      <p class="ml-auto mb-0"><span class="range-output">100</span>%</p>' + "\n";
+  html += '                      <p class="ml-auto mb-0"><span class="range-output">0</span>%</p>' + "\n";
   html += '                    </li>' + "\n";
   html += '                    <li class="list-group-item pt-0 pb-4">' + "\n";
-  html += '                      <input id="dimmer-'+name+'-'+nbr_id+'" type="range" min="10" max="100" value="100">' + "\n";
+  html += '                      <input id="dimmer-'+name+'-'+nbr_id+'" type="range" min="0" max="255" value="0">' + "\n";
   html += '                    </li>' + "\n";
   html += '                  </ul>' + "\n";
   html += '                  <div class="info-holder info-cb">' + "\n";
   html += '                    <div data-toggle="popover-all" data-content="jQuery range slider using localStorage to remember the last status." data-original-title="Dimmer control" data-placement="top" data-offset="0,-24"></div>' + "\n";
   html += '                  </div>' + "\n";
   html += '                  <!-- Dimmer control - range slider END -->' + "\n";  
+  html += '              </div>' + "\n";
+  }
+  if(rgbPicker) {
+  html += '                <div id="switch-card-rgb-'+nbr_id+'"  style="display:">' + "\n";
+  html += '                  <hr class="my-0">' + "\n";
+html += '      <div class="list-group-item align-items-center " style="' + "\n";
+html += '           justify-content: center;' + "\n";
+html += '           " >' + "\n";
+html += '      <p class="specs">Couleur : </p>' + "\n";
+html += '      <button ' + "\n";
+html += '        id="switch-card-rgb-'+name+'-'+nbr_id+'" ' + "\n";
+html += '        style="' + "\n";
+html += '           margin-left: auto;' + "\n";
+html += '          width: 100px;' + "\n";
+html += '          height: 35px;' + "\n";
+html += '          border-radius: 5px;' + "\n";
+html += '          border: none;' + "\n";
+html += '          outline: none;' + "\n";
+html += '          cursor: pointer;' + "\n";
+html += '        "' + "\n";
+html += '        name="text"' + "\n";
+html += '      ></button>' + "\n";
+  html += '              </div>' + "\n";
   html += '              </div>' + "\n";
   }
   html += '                </div>' + "\n";

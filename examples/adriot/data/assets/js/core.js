@@ -398,6 +398,19 @@ function html_createCard_light(div_name){
 	}
 	// document.getElementById(div_name).innerHTML = html;
 }
+function request_card_light(name){
+	for (var i = 0; i < mModulesList_arraySize; i++) {
+		if (mModulesList_array[i][mModulesList_array_id] == name) {
+			console.log(mModulesList_array[i][0]);
+			console.log(mModulesList_array[i][1]);
+			console.log(mModulesList_array[i][2]);
+			console.log(mModulesList_array[i][3]);
+			console.log(mModulesList_array[i][4]);
+			console.log(mModulesList_array[i][5]);
+			console.log(mModulesList_array[i][3]);
+		}
+	}
+}
 function html_createCard_plug_home(div_name){
 
 	if (document.getElementById(div_name) == null) return;
@@ -564,11 +577,11 @@ function card_temperature_data(nbr_id, tempC, tempF){
 // 	GUI FUNCTIONS
 // 	
 // 	CREATE DEFAULT STATIC SWITCH MODULE 
-function html_createCardSwitch(div_name, cnt, slider, name, ico){
+function html_createCardSwitch(div_name, cnt, slider, name, ico, rgbPicker){
 	if (document.getElementById(div_name) == null) return;
   	var html = "";
   	for (var i = 0; i < cnt; i++) { // {"mType":{"0":"sensor","1":"relay"}}
-		html += card_switch(i, "switch-light-"+i, slider, name, ico);
+		html += card_switch(i, "switch-light-"+i, slider, name, ico, rgbPicker);
 	}
     document.getElementById(div_name).innerHTML = html;
 }
@@ -590,8 +603,31 @@ function html_createCardSwitch_plug_home(div_name, cnt){
 }
 // 	INITIIALISE
 function gui_initialize(){
-	html_createCardSwitch("replace_light", 10, true,'light', 'bulb-eco');
-	html_createCardSwitch("replace_ac", 10, true,'plug', 'appliances');
+	html_createCardSwitch("replace_rgb", 10, true,'colorpicker', 'bulb-eco', true);
+
+
+
+	// 		let text = new ColorPicker(document.getElementById('text'), '#1a00ad');
+ // var cars = ["Saab", "text", "BMW"]; 
+
+	// 		for (var i = 0; i < 2; i++) {
+	// 			if (document.getElementById(cars[i]) == null) continue;
+	// 			document.getElementById(cars[i]).addEventListener('colorChange', function () {
+	// 				console.log(event.detail);
+	// 				document.getElementById('te').style.color = event.detail.color.hexa;
+	// 			});				
+	// 		}
+			
+			for (var i = 0; i < 10; i++) {
+				// if (document.getElementById("switch-card-rgb-colorpicker-"+i) == null) continue;
+				let text = new ColorPicker(document.getElementById("switch-card-rgb-colorpicker-"+i), '#1a00ad');
+				document.getElementById("switch-card-rgb-colorpicker-"+i).addEventListener('colorChange', function () {
+					console.log(event.detail);
+					// document.getElementById('te').style.color = event.detail.color.hexa;
+				});				
+			}	
+	html_createCardSwitch("replace_light", 10, true,'light', 'bulb-eco', false);
+	html_createCardSwitch("replace_ac", 10, true,'plug', 'appliances', false);
 	html_createCardSwitch_home("replace_home_light", 10);
 	html_createCardSwitch_plug_home("replace_home_plug", 10);
 }

@@ -6,6 +6,8 @@
 	#include <adriiot_relay.h>
 	#include <adriiot_dht22.h>
 	#include <adriiot_DS18B20.h>
+	#include <ADRIIOT_RGBneo.h>
+	#include <ADRIIOT_lightDimmer.h>
 	#include <adri_espwebserver.h>
 	#include <ALS_espwebserver.h>
 	#include "network\wifi.h"

@@ -15,6 +15,7 @@
 
   <!-- Additional styles for this template -->
   <link href="assets/css/iot-theme.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/cp/colr_pickr.min.css" />
 
 </head>
 
@@ -179,7 +180,12 @@
             </div> 
 
           </div>
+          <div class="container-fluid">
 
+            <div id="replace_rgb" class="row" data-unit-group="switch-lights-in">
+            </div> 
+
+          </div>
           <!-- Main content overlay when side menu appears  -->
           <div class="cover-offcanvas" data-toggle="offcanvas"></div>
         </div>
@@ -233,6 +239,8 @@
   <!-- Chartist.js pugin - Legend -->
   <script src="assets/js/chartist-legend.min.js"></script>
 
+  <script type="text/javascript" src="assets/cp/colr_pickr.min.js"></script>
+  
   <script src="assets/js/r-websocket.min.js"></script>
   <script src="assets/js/html.js"></script>
   <script src="assets/js/core.js"></script>
@@ -349,6 +357,7 @@
           iot.switchSingle(this.id, this.checked);
 
         }
+        request_send("httpRequest", "arg", "switch : " + this.id);
       });
 
       // All ON/OFF controls
@@ -358,6 +367,7 @@
         var action = $(this).data('action');
 
         iot.switchGroup(target, action);
+        request_send("httpRequest", "arg", target + " : " + action);
       });
 
       // Reposition to center when a modal is shown
@@ -403,6 +413,7 @@
       // Data binding for numeric representation of range slider
       $(document).on('input', 'input[type="range"]', function() {
         $('[data-rangeslider="' + this.id + '"] .range-output').html(this.value);
+        request_send("httpRequest", "arg", this.id  + " : " + this.value);
       });
 
 

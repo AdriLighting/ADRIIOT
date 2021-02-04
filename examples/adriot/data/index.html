@@ -15,11 +15,16 @@
 
 	<!-- Additional styles for this template -->
 	<link href="assets/css/iot-theme.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/cp/colr_pickr.min.css" />
 
 </head>
 
 <body>
-
+	<style>
+	    .inl-bl {
+	        display: inline-block;
+	    }
+	</style>
 	<!-- Preloader -->
 	<div id="iot-preloader">
 		<div class="center-preloader d-flex align-items-center">
@@ -247,7 +252,23 @@
 								<!-- Appliances  END -->
 							</div>
 						</div>
+			<div class="list-group borderless px-1">			
+			<button
+				id="text"
+				style="
+					width: 100px;
+					height: 35px;
+					border-radius: 5px;
+					border: none;
+					outline: none;
+					cursor: pointer;
+					margin-left: pointer;
+				"
+				name="text"
+			></button>
+			</div>
 
+			<p id="te">dsqdsd </p>
 						<div class="row">
 
 						</div>
@@ -303,7 +324,20 @@
 	<script src="assets/js/r-websocket.min.js"></script>
 	<script src="assets/js/html.js"></script>
 	<script src="assets/js/core.js"></script>
+	<script type="text/javascript" src="assets/cp/colr_pickr.min.js"></script>
 	<script>
+
+
+			let text = new ColorPicker(document.getElementById('text'), '#1a00ad');
+ var cars = ["Saab", "text", "BMW"]; 
+
+			for (var i = 0; i < 2; i++) {
+				if (document.getElementById(cars[i]) == null) continue;
+				document.getElementById(cars[i]).addEventListener('colorChange', function () {
+					console.log(event.detail);
+					document.getElementById('te').style.color = event.detail.color.hexa;
+				});				
+			}
 
 		if (navigator.onLine) { 
 			!function(d,s,id){
@@ -321,7 +355,6 @@
 		}
 
 		$(document).ready(function() {
-
 
 			// Get checkbox statuses from localStorage if available (IE)
 			if (localStorage) {
@@ -427,6 +460,8 @@
 
 				}
 				console.log("switch : " + this.id ) ;
+				request_send("httpRequest", "arg", "switch : " + this.id + " : " + this.checked);
+				request_card_light(this.id);
 			});
 			// All ON/OFF controls
 			$('.plugs-control').click(function() {
@@ -435,6 +470,8 @@
 				var action = $(this).data('action');
 
 				iot.switchGroup(target, action);
+
+				request_send("httpRequest", "arg", target + " : " + action);
 			});
 
 			// All ON/OFF controls
@@ -444,6 +481,8 @@
 				var action = $(this).data('action');
 
 				iot.switchGroup(target, action);
+
+				request_send("httpRequest", "arg", target + " : " + action);
 			});
 
 			// Reposition to center when a modal is shown
