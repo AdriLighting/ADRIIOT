@@ -127,8 +127,11 @@ adri_tools_v2<br />
 ### FAIT
 ADRIIOT_RGBneo<br />
 * librairie ![ADRIIOT_RGBneo](https://github.com/AdriLighting/ADRIIOT_RGBneo)
+ADRIIOT_lightDimmer<br />
+* librairie ![ADRIIOT_lightDimmer](https://github.com/AdriLighting/ADRIIOT_lightDimmer)
 <pre>
-    module rgb
+    module strip rgb
+    module lightDimmer
     requette from domoticz via mqtt pour le control des modules
     
 </pre>
