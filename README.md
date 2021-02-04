@@ -104,7 +104,6 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 <pre>
     module wemos d1 pro + oledi2c + relay
     trouver un system de requette pour domoticz+socket/http+udp
-    sauvegarde des statu modules via spiff 
 </pre>    
 ### FAIT
 adri_tools_v2<br />
@@ -123,6 +122,7 @@ adri_tools_v2<br />
 <pre>
     module wemos d1 pro + oledi2c + relay
     trouver un system de requette pour domoticz+socket/http+udp
+    sauvegarde des statu modules via spiff 
 </pre>    
 ### FAIT
 ADRIIOT_RGBneo<br />
