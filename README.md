@@ -65,22 +65,11 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ## 20/01/2021 09:33:51
 ### Idée
 <pre>
-    1 séléction des modules voulllu.
-    2 sauvegarde de la séléction
-    1 chargement de ma séméction des modules
-    ----
-    modules dynamique
-        relay
-        soilmoisture
-        dht22      
-    ----
-    openweather
-    database with graphic interface (agenda, stock de ressource, etc...)
-    ---- 
+    no up
 </pre>
 ### FAIRE
 <pre>
-    module wemos d1 pro + oledi2c + relay
+    no up
 </pre>    
 ### FAIT
 <pre>
@@ -92,22 +81,11 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ## 29/01/2021 02:37:53
 ### Idée
 <pre>
-    1 séléction des modules voulllu.
-    2 sauvegarde de la séléction
-    1 chargement de ma séméction des modules
-    ----
-    modules dynamique
-        relay
-        soilmoisture
-        dht22      
-    ----
-    openweather
-    database with graphic interface (agenda, stock de ressource, etc...)
-    ---- 
+    no up
 </pre>
 ### FAIRE
 <pre>
-    module wemos d1 pro + oledi2c + relay
+    no up
 </pre>    
 ### FAIT
 <pre>
@@ -135,18 +113,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 ## 01/02/2021 11:51:07
 ### Idée
 <pre>
-    1 séléction des modules voulllu.
-    2 sauvegarde de la séléction
-    1 chargement de ma séméction des modules
-    ----
-    modules dynamique
-        relay
-        soilmoisture
-        dht22      
-    ----
-    openweather
-    database with graphic interface (agenda, stock de ressource, etc...)
-    ---- 
+    no up
 </pre>
 ### FAIRE
 <pre>
@@ -154,9 +121,29 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     trouver un system de requette pour domoticz+socket/http+udp
 </pre>    
 ### FAIT
-adriiot_soilmoisture)<br />
+adri_tools_v2<br />
 * librairie ![adri_tools_v2](https://github.com/AdriLighting/adri_tools_v2)
 <pre>
     debugger-logger
     
 </pre>
+
+## 04/02/2021 09:11:54
+### Idée
+<pre>
+    no up
+</pre>
+### FAIRE
+<pre>
+    module wemos d1 pro + oledi2c + relay
+    trouver un system de requette pour domoticz+socket/http+udp
+</pre>    
+### FAIT
+ADRIIOT_RGBneo<br />
+* librairie ![ADRIIOT_RGBneo](https://github.com/AdriLighting/ADRIIOT_RGBneo)
+<pre>
+    module rgb
+    requette from domoticz via mqtt pour le control des modules
+    
+</pre>
+
