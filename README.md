@@ -113,6 +113,9 @@ adri_tools_v2<br />
     
 </pre>
 
+<br />
+<hr>
+
 ## 04/02/2021 09:11:54
 ### Idée
 <pre>
@@ -122,7 +125,9 @@ adri_tools_v2<br />
 <pre>
     module wemos d1 pro + oledi2c + relay
     trouver un system de requette pour domoticz+socket/http+udp
-    sauvegarde des statu modules via spiff 
+    sauvegarde des statu modules via spiff
+    logger
+        sauvegarde des regions a debug 
 </pre>    
 ### FAIT
 ADRIIOT_RGBneo<br />
@@ -137,3 +142,25 @@ ADRIIOT_lightDimmer<br />
     
 </pre>
 
+<br />
+<hr>
+
+### Idée
+<pre>
+    no up
+</pre>
+### FAIRE
+<pre>
+    module wemos d1 pro + oledi2c + relay
+    trouver un system de requette pour domoticz+socket/http+udp
+    sauvegarde des statu modules via spiff
+    logger
+        sauvegarde des regions a debug 
+    socket send 
+        check if client ar connected be for mak json
+</pre>    
+### FAIT
+<pre>
+    doc logger pour adritools_v2
+    
+</pre>

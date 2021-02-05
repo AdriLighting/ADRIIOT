@@ -6,6 +6,7 @@
 WiFiClient 		PubSubClient_espClient;
 
 // region ################################################ LOOP
+
 void adriiot_main::loop(){
 
 	_tools->loop();
@@ -56,6 +57,8 @@ void adriiot_main::loop(){
 // endregion >>>> LOOP
 
 // region ################################################ SPIFFS PRINT FILES
+
+
 int adriiot_print_SPIFFfolder(String path){
 
 	Dir sub_dir = LittleFS.openDir(path);
@@ -257,7 +260,7 @@ void adriiot_mqtt::publish(String jsonStr) {
 char adriiot_mqtt_packetBuffer[512]; 
 void adriiot_mqtt::callback(char* topic, byte* payload, unsigned int length) {
 	ADRI_LOG(2, -1, 0, "<<<", "");
-	ADRI_LOG(2, 0, 2,"","");
+	ADRI_LOG(2, 0, 2,"callback","");
 	for (int i = 0; i < length; i++) {
 		adriiot_mqtt_packetBuffer[i]=(char)payload[i];
 	}
@@ -269,7 +272,8 @@ void adriiot_mqtt::callback(char* topic, byte* payload, unsigned int length) {
 	ADRI_LOG(2, -1, 0, ">>>", "");	
 }
 void adriiot_mqtt::domoticz_parse(String json){
-	ADRI_LOG(3, 0, 2,"","");
+	ADRI_LOG(3, -1, 0, "----<<<", "");
+	ADRI_LOG(3, 0, 2,"domoticz_parse","");
 	const size_t serializeSize = 512 * 4;	
     DynamicJsonDocument oject(serializeSize);
     DeserializationError err = deserializeJson(oject, json);
@@ -285,6 +289,7 @@ void adriiot_mqtt::domoticz_parse(String json){
 		adriiot_domoticz_ptr->update_module(oject, 3);
     }   
     ADRI_LOG(3, 1, 2,"","");
+    ADRI_LOG(3, -1, 0, "---->>>", "");	
 }
 
 /*
@@ -338,57 +343,7 @@ void adriiot_main::dashboard_webClient_update(int pos, int debug){
 // endregion >>>> dashboard uodate
 
 // region ################################################ logger
-String _serial_logger_region(String cmd, String value){
-	adriTools_logger * _looger = adriTools_logger_ptrGet();
-	ADRI_LOGP(false, -1, -1, 0, "<<<", "");
-	ADRI_LOGP(false, -1, 0, 2,"","");
-	ADRI_LOGP(false, -1, 2, 2, "cmd: %s - value: %S", cmd.c_str(), value.c_str());	
-	int pos = value.toInt();
-	_looger->activateByVariable_toggle(pos);
-	ADRI_LOGP(false, -1, 1, 2,"","");
-	ADRI_LOGP(false, -1, -1, 0, ">>>", "");
-	return "";
-}
-String _serial_logger_regionAddLine(String cmd, String value){
-	adriTools_logger * _looger = adriTools_logger_ptrGet();
-	ADRI_LOGP(false, -1, -1, 0, "<<<", "");
-	ADRI_LOGP(false, -1, 0, 2,"","");
-	ADRI_LOGP(false, -1, 2, 2, "cmd: %s - value: %S", cmd.c_str(), value.c_str());	
-	int pos = value.toInt();
-	_looger->activateByVariable_toggleAddLine(pos);
-	ADRI_LOGP(false, -1, 1, 2,"","");
-	ADRI_LOGP(false, -1, -1, 0, ">>>", "");
-	return "";
-}
-String _serial_logger(String cmd, String value){
-	adriTools_logger * _looger = adriTools_logger_ptrGet();
-	ADRI_LOGP(false, -1, -1, 0, "<<<", "");
-	ADRI_LOGP(false, -1, 0, 2,"","");
-	ADRI_LOGP(false, -1, 2, 2, "cmd: %s - value: %S", cmd.c_str(), value.c_str());	
-	int pos = value.toInt();
-	if (value == "a") {
-		_looger->serial_menu();
-	} else if (value == "z") {
-		_looger->printer_display_toggle();
-	} else if (value == "e") {
-		_looger->printer_heap_toggle();
-	} else if (value == "r") {
-		_looger->printer_timestamp_toggle();
-	} else if (value == "t") {
-		_looger->spiff_toggle();
-	} else if (value == "y") {
-		_looger->spiff_readCurrent();
-	} else if (value == "u") {
-		_looger->spiff_removeCurrent();
-	} else if (value == "i") {
-		_looger->activateByVariable_print();		
-	} else {
-		_looger->printer_display_lvl_set(pos);	
-	}
-	ADRI_LOGP(false, -1, 1, 2,"","");
-	ADRI_LOGP(false, -1, -1, 0, ">>>", "");
-	return "";
-}		
+		
 // endregion >>>> logger
 
 // ############################################

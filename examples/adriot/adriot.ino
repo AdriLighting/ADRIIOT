@@ -73,12 +73,13 @@ void setup()
     _serial->cmd_item_add(1, "printJson_domoticz",	"f",		"", _serial_printJson_domoticz);
     _serial->cmd_item_add(1, "print_spiff",			"g",		"", _serial_print_spiff);
     _serial->cmd_item_add(1, "adriTrace",			"h",		"", _serial_adriTrace);
-    _serial->cmd_array(2, 5); //					!+touche=cmd
+    _serial->cmd_array(2, 6); //					!+touche=cmd
     _serial->cmd_item_add(2, "cmd",					"a",		"", _serial_cmd);
     _serial->cmd_item_add(2, "websocket",			"z",		"", _serial_websocket);
-    _serial->cmd_item_add(2, "loggerRegion",		"s",		"", _serial_logger_region);
-    _serial->cmd_item_add(2, "logger_regionAddLine","d",		"", _serial_logger_regionAddLine);
-    _serial->cmd_item_add(2, "logger",				"q",		"", _serial_logger);    
+    _serial->cmd_item_add(2, "loggerRegion",		"q",		"", adriToolLogger_serialMenu_region);
+    _serial->cmd_item_add(2, "logger_regionAddLine","s",		"", adriToolLogger_serialMenu_regionAddLine);
+    _serial->cmd_item_add(2, "logger_regionSerial",	"d",		"", adriToolLogger_serialMenu_regionSerialPrint);
+    _serial->cmd_item_add(2, "logger",				"e",		"", adriToolLogger_serialMenu_cmd);    
 	// _serial->menu(); // Print menu	
 // endregion >>>> KEYBOARD MENU
 
@@ -99,7 +100,14 @@ void setup()
 	_looger->activateByVariable_add("mqtt receive/send"); 	
 	_looger->activateByVariable_add("mqtt parse"); 	
 	_looger->activateByVariable_add("sockett parse"); 	
-
+	_looger->activateByVariable_toggleAddLine(0);
+	_looger->activateByVariable_toggleSerial(0);
+	_looger->activateByVariable_toggleSerial(1);
+	_looger->activateByVariable_toggleSerial(2);
+	_looger->activateByVariable_toggleSerial(3);
+	_looger->activateByVariable_toggleSerial(4);
+	_looger->spiffAddLine_otherRegion_toggle();
+	_looger->spiff_toggle();
 // endregion >>>> logger
 
 // region ################################################ MODULE FROM SPIFF
@@ -145,20 +153,28 @@ void setup()
 	adriiotMain->_moduleManagment->create_plug(			D4, 	"machinne a café",	4		); 	 														// 1 |NULL
 // endregion >>>> MODULES
 
-delay(1000);
-adriiotMain->_moduleManagment->getIdByName("rgb", setup_id);	                                           			    	                  	 		   	 														// 
-adriiotMain->_RGBneoManagment->module(setup_id)->leds_rgb(0, 0, 255);
+	delay(1000);
+	adriiotMain->_moduleManagment->getIdByName("rgb", setup_id);	                                           			    	                  	 		   	 														// 
+	adriiotMain->_RGBneoManagment->module(setup_id)->leds_rgb(255, 0, 0);
 
-adriiotMain->wifiConnect(SECRET_SSID, SECRET_PASS);	
-#ifdef ADRIOTOOLS_USETELNET
-adri_toolsv2Ptr_get()->_telnetSetup();	
-#endif
+	adriiotMain->wifiConnect(SECRET_SSID, SECRET_PASS);	
+
+	adriiotMain->_RGBneoManagment->module(setup_id)->leds_rgb(0, 255, 0);
+
+	#ifdef ADRIOTOOLS_USETELNET
+	adri_toolsv2Ptr_get()->_telnetSetup();	
+	#endif
 	
+	timerCloud = new adri_timer(5000, "", true)	;
 }
 
 
 void loop()
 {
+
+	if (timerCloud->loop_stop()) {
+		adriTools_logger_ptrGet()->activateByVariable_toggleAddLine(0);
+	}
 
 	_serial->loop();
 

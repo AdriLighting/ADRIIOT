@@ -243,7 +243,5 @@ void _whenWebsocketIsConnect();
 		
 	};
 
-	String _serial_logger_regionAddLine(String cmd, String value);
-	String _serial_logger_region(String cmd, String value);
-	String _serial_logger(String cmd, String value);
+
 #endif // adriiot_MAIN_H
