@@ -6,7 +6,6 @@ Creation of a set of libraries for the use of IOT module .<br />
 ## Features
 
 * Support for **multiple ESP8266-based boards**
-* Power saving options
 * Wifi **AP Mode** or **STA mode**
     * Supports static IP
     * Up to 3 different networks can be defined
@@ -14,12 +13,15 @@ Creation of a set of libraries for the use of IOT module .<br />
     * Defaults to AP mode 
 * Network visibility
     * Supports mDNS (service reporting and metadata) both server mode and client mode (.local name resolution)
-    * Supports NetBIOS, LLMNR and Netbios (when built with Arduino Core >= 2.4.0)
+    * Supports NetBIOS 
 * display 
     * support for ili9341
          * display module state
          * display rtc or ntp time
          * display mete from openWeatherApi
+* module managment
+    * via web user interfance 
+      * add or remove module
 * Switch management
     * Support for **push buttons** and **toggle switches**
     * Support for **digital** and [**analog**](https://en.wikipedia.org/wiki/Resistor_ladder) buttons
