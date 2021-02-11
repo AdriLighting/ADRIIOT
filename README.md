@@ -17,6 +17,9 @@ Creation of a set of libraries for the use of IOT module .<br />
     * Supports NetBIOS, LLMNR and Netbios (when built with Arduino Core >= 2.4.0)
 * display 
     * support for ili9341
+         * display module state
+         * display rtc or ntp time
+         * display mete from openWeatherApi
 * Switch management
     * Support for **push buttons** and **toggle switches**
     * Support for **digital** and [**analog**](https://en.wikipedia.org/wiki/Resistor_ladder) buttons
@@ -26,18 +29,28 @@ Creation of a set of libraries for the use of IOT module .<br />
     * Support for **latched relays**
 * Analog management
 * **MQTT** enabled
-* domoticz integration
+* domoticz integration via MQTT
    * Light/Switch
    * Color Switch
    * Temp + Humidity
    * Temp
    * Soil moisture
+* HTTP Server for Web User Interface
+    * dasboard interface for controll the devices
+    * Websockets-based communication between the device and the browser
+* Telnet support
+    * Shows debug info and allows to run terminal commands
+* NTP for time synchronization
+    * Supports worldwide time zones
+    * Compatible with DST (EU and USA)
+* OpenWeatherApi support
 * Support for [different **sensors**](Sensors)
     * Environment
         * **DHT22 / DS2812b**
 * Support for LED lights
    * AC dimmer pwm
    * rgb/rgbw strip based on ws2812b/SK6812 
+
 
 </br>
 <hr>
