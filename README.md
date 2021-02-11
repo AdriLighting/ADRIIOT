@@ -91,9 +91,6 @@ Creation of a set of libraries for the use of IOT module .<br />
   https://github.com/adafruit/Adafruit_Sensor
   
   https://github.com/bblanchon/ArduinoJson
-  https://github.com/adafruit/Adafruit_NeoPixel
-  
-  https://github.com/bblanchon/ArduinoJson
   https://github.com/squix78/json-streaming-parser.git
   
   https://github.com/adafruit/Adafruit_BusIO
