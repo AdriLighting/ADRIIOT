@@ -5,7 +5,7 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 
 ## Features
 
-* Support for **multiple ESP8266-based boards** ([check list](https://github.com/xoseperez/espurna/wiki/Hardware))
+* Support for **multiple ESP8266-based boards**
 * Power saving options
 * Wifi **AP Mode** or **STA mode**
     * Supports static IP
