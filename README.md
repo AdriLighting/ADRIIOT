@@ -18,17 +18,19 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     * Supports mDNS (service reporting and metadata) both server mode and client mode (.local name resolution)
     * Supports NetBIOS, LLMNR and Netbios (when built with Arduino Core >= 2.4.0) and SSDP (experimental)
 * Switch management
+    * Support for **push buttons** and **toggle switches**
     * Support for **digital** and [**analog**](https://en.wikipedia.org/wiki/Resistor_ladder) buttons
-
+    * Configurable **status on boot** per switch (always ON, always OFF, same as before or toggle)
+    * Support for **relay synchronization** (all equal, only one ON, one and only on ON)
+    * Support for **delayed ON/OFF**
+    * Support for **latched relays**
+* Analog management
 * **MQTT** enabled
-
 * Support for [different **sensors**](Sensors)
     * Environment
-        * **DHT11 / DHT12 / DHT22 / DHT21 / AM2301 / Itead's SI7021**
-
-
+        * **DHT22 / DS2812b**
 * Support for LED lights
-
+   * rgb/rgbw strip based on ws2812b/SK6812 
 
 </br>
 <hr>
