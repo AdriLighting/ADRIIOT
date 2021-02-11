@@ -2,6 +2,38 @@
 16/01/2021.<br />
 Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 
+
+## Features
+
+* Support for **multiple ESP8266-based boards** ([check list](https://github.com/xoseperez/espurna/wiki/Hardware))
+* Power saving options
+* Wifi **AP Mode** or **STA mode**
+    * Supports static IP
+    * Up to 5 different networks can be defined
+    * Scans for strongest network if more than one defined (also available in web UI)
+    * Handles correctly multiple AP with the same SSID
+    * Defaults to AP mode (also available after double clicking the main button)
+    * Support for **WPS** and **Smart Config** (not available in default builds)
+* Network visibility
+    * Supports mDNS (service reporting and metadata) both server mode and client mode (.local name resolution)
+    * Supports NetBIOS, LLMNR and Netbios (when built with Arduino Core >= 2.4.0) and SSDP (experimental)
+* Switch management
+    * Support for **digital** and [**analog**](https://en.wikipedia.org/wiki/Resistor_ladder) buttons
+
+* **MQTT** enabled
+
+* Support for [different **sensors**](Sensors)
+    * Environment
+        * **DHT11 / DHT12 / DHT22 / DHT21 / AM2301 / Itead's SI7021**
+
+
+* Support for LED lights
+
+
+</br>
+<hr>
+</br>
+
 * ![adriiot_relay](https://github.com/AdriLighting/adriiot_relay)<br />
 * ![adriiot_soilmoisture](https://github.com/AdriLighting/adriiot_soilmoisture)<br />
 * ![adriiot_dht22](https://github.com/AdriLighting/adriiot_dht22)<br />
