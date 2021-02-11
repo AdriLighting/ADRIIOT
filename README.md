@@ -9,14 +9,15 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 * Power saving options
 * Wifi **AP Mode** or **STA mode**
     * Supports static IP
-    * Up to 5 different networks can be defined
+    * Up to 3 different networks can be defined
     * Scans for strongest network if more than one defined (also available in web UI)
     * Handles correctly multiple AP with the same SSID
-    * Defaults to AP mode (also available after double clicking the main button)
-    * Support for **WPS** and **Smart Config** (not available in default builds)
+    * Defaults to AP mode 
 * Network visibility
     * Supports mDNS (service reporting and metadata) both server mode and client mode (.local name resolution)
     * Supports NetBIOS, LLMNR and Netbios (when built with Arduino Core >= 2.4.0) and SSDP (experimental)
+* Tft 
+    * support for ili9341
 * Switch management
     * Support for **push buttons** and **toggle switches**
     * Support for **digital** and [**analog**](https://en.wikipedia.org/wiki/Resistor_ladder) buttons
@@ -36,6 +37,8 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 <hr>
 </br>
 
+## dependence
+### personal
 * ![adriiot_relay](https://github.com/AdriLighting/adriiot_relay)<br />
 * ![adriiot_soilmoisture](https://github.com/AdriLighting/adriiot_soilmoisture)<br />
 * ![adriiot_dht22](https://github.com/AdriLighting/adriiot_dht22)<br />
@@ -51,15 +54,13 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
 * ![adri_logger](https://github.com/AdriLighting/adri_logger)<br />
 * ![adri_tools_v2_telnet](https://github.com/AdriLighting/adri_tools_v2_telnet)<br />
 * ![adri_tools_v2_serialMenu](https://github.com/AdriLighting/adri_tools_v2_serialMenu)<br />
-
-
-## dependence
+### extern
 <pre>
   https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266WiFi
-  <LittleFS(esp8266)> 0.1.0
-  <ESP8266WiFi> 1.0
-  <ESP8266mDNS> 1.2  
-  <ArduinoOTA> 1.0
+     LittleFS(esp8266) 0.1.0
+     ESP8266WiFi 1.0
+     ESP8266mDNS 1.2  
+     ArduinoOTA 1.0
   https://github.com/Links2004/arduinoWebSockets
   https://github.com/squix78/json-streaming-parser.git
   https://github.com/adafruit/Adafruit_BusIO
