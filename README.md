@@ -1,6 +1,6 @@
 # ADRIIOT
 16/01/2021.<br />
-Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
+Creation of a set of libraries for the use of IOT module .<br />
 
 
 ## Features
@@ -11,12 +11,11 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     * Supports static IP
     * Up to 3 different networks can be defined
     * Scans for strongest network if more than one defined (also available in web UI)
-    * Handles correctly multiple AP with the same SSID
     * Defaults to AP mode 
 * Network visibility
     * Supports mDNS (service reporting and metadata) both server mode and client mode (.local name resolution)
-    * Supports NetBIOS, LLMNR and Netbios (when built with Arduino Core >= 2.4.0) and SSDP (experimental)
-* Tft 
+    * Supports NetBIOS, LLMNR and Netbios (when built with Arduino Core >= 2.4.0)
+* display 
     * support for ili9341
 * Switch management
     * Support for **push buttons** and **toggle switches**
@@ -27,18 +26,25 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
     * Support for **latched relays**
 * Analog management
 * **MQTT** enabled
+* domoticz integration
+   * Light/Switch
+   * Color Switch
+   * Temp + Humidity
+   * Temp
+   * Soil moisture
 * Support for [different **sensors**](Sensors)
     * Environment
         * **DHT22 / DS2812b**
 * Support for LED lights
+   * AC dimmer pwm
    * rgb/rgbw strip based on ws2812b/SK6812 
 
 </br>
 <hr>
 </br>
 
-## dependence
-### personal
+## Dependencies
+### from my persoanl libraibries
 * ![adriiot_relay](https://github.com/AdriLighting/adriiot_relay)<br />
 * ![adriiot_soilmoisture](https://github.com/AdriLighting/adriiot_soilmoisture)<br />
 * ![adriiot_dht22](https://github.com/AdriLighting/adriiot_dht22)<br />
@@ -62,22 +68,26 @@ Création d'un Enssemble de libraries pour l'utilisation de module IOT.<br />
      ESP8266mDNS 1.2  
      ArduinoOTA 1.0
   https://github.com/Links2004/arduinoWebSockets
-  https://github.com/squix78/json-streaming-parser.git
-  https://github.com/adafruit/Adafruit_BusIO
-  https://github.com/adafruit/Adafruit-GFX-Library
+  
   http://playground.arduino.cc/Code/Time/
+
+  https://github.com/adafruit/Adafruit_NeoPixel
+  
+  https://github.com/adafruit/Adafruit_Sensor
+  
+  https://github.com/bblanchon/ArduinoJson
+  https://github.com/adafruit/Adafruit_NeoPixel
+  
+  https://github.com/bblanchon/ArduinoJson
+  https://github.com/squix78/json-streaming-parser.git
+  
+  https://github.com/adafruit/Adafruit_BusIO
+  https://github.com/adafruit/Adafruit-GFX-Library  
+  https://github.com/adafruit/Adafruit_ILI9341 
+  https://github.com/olikraus/U8g2_for_Adafruit_GFX
+  https://github.com/Bodmer/JPEGDecoder
   http://github.com/spapadim/XPT2046
   https://github.com/Bodmer/JPEGDecoder
-  https://github.com/olikraus/U8g2_for_Adafruit_GFX
-  https://github.com/bblanchon/ArduinoJson
-  https://github.com/adafruit/Adafruit_NeoPixel
-  https://github.com/adafruit/Adafruit_Sensor
-  https://github.com/adafruit/Adafruit_ILI9341
-  https://github.com/Bodmer/JPEGDecoder
-  https://github.com/olikraus/U8g2_for_Adafruit_GFX
-  https://github.com/bblanchon/ArduinoJson
-  https://github.com/adafruit/Adafruit_NeoPixel
-  https://github.com/adafruit/Adafruit_Sensor
-  https://github.com/adafruit/Adafruit_ILI9341  
+  
 </pre>
 
