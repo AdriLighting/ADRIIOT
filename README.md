@@ -36,7 +36,7 @@ Creation of a set of libraries for the use of IOT module .<br />
    * Temp
    * Soil moisture
 * HTTP Server for Web User Interface
-    * dasboard interface for controll the devices
+    * dasboard interface for devices controll and satte 
     * Websockets-based communication between the device and the browser
 * Telnet support
     * Shows debug info and allows to run terminal commands
