@@ -1,6 +1,7 @@
 ADC_MODE(ADC_VCC); 		// FOR TEST AS SENSOR MODULE
 
 #include <Adafruit_Sensor.h>
+// #include <adri_tools_v2_serialMenu.h>
 
 
 #define ADRIOTOOLS_USETELNET
@@ -84,7 +85,7 @@ void setup()
     _serial->cmd_item_add(1, "printJson_mod",		"d",		"", _serial_printJson_mod);
     _serial->cmd_item_add(1, "printJson_domoticz",	"f",		"", _serial_printJson_domoticz);
     _serial->cmd_item_add(1, "print_spiff",			"g",		"", _serial_print_spiff);
-    _serial->cmd_item_add(1, "adriTrace",			"h",		"", _serial_adriTrace);
+    _serial->cmd_item_add(1, "screen next",			"h",		"", _serial_screenNext);
     _serial->cmd_array(2, 6); //					!+touche=cmd
     _serial->cmd_item_add(2, "cmd",					"a",		"", _serial_cmd);
     _serial->cmd_item_add(2, "websocket",			"z",		"", _serial_websocket);
@@ -187,7 +188,7 @@ void setup()
 
 		_tft_ui = new tft_ui();
 
-		adriTFTscreen_set_pos(0);
+		adriTFTscreen_set_pos(1);
 		adriTFTscreen_display();
 			
 		new adriiot_tft_home();	
@@ -312,9 +313,17 @@ String _serial_cmd(String cmd, String value){
 	adriiotMain->_relayManagment->module(id)->toggle();
 	return "";
 }
-String _serial_adriTrace(String cmd, String value){
-	adri_toolsv2_trace =! adri_toolsv2_trace;
-	fsprintfv(adri_toolsv2_trace, "\n[adri_toolsv2_trace]\n");
+String _serial_screenNext(String cmd, String value){
+		adriTFTscreen_next(1);
+		int count = adriiot_main_ptrGet()->_moduleManagment->_pos;
+		for (int i = 0; i < 10; ++i)
+		{
+			adriiot_tft_device_ptr->_init[i] = false;
+		}			
+		for (int i = 0; i < count; ++i)
+		{
+			adriiot_tft_update(i);
+		}		
 	return "";
 }
 
