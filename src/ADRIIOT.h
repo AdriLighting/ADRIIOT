@@ -1,7 +1,7 @@
-#ifndef ADRIIOT_h
-	#define ADRIIOT_h
+// #ifndef ADRIIOT_h
+	// #define ADRIIOT_h
 
-	#include "adriiot_main.h"
 	#include "adriiot_lib.h"
+	#include "adriiot_main.h"
 
-#endif // adriiot
+// #endif // adriiot

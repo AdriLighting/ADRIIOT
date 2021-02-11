@@ -1,43 +1,63 @@
 
 
-#ifndef adriiot_MAIN_H
-#define adriiot_MAIN_H
-	#include <Arduino.h>
-	#include "adriiot_lib.h"
+// #ifndef adriiot_MAIN_H
+// #define adriiot_MAIN_H
 
-	#include <ArduinoJson.h>
-	#include <adri_tools_v2.h>
 
-	#include <ESP8266WiFi.h>
-	#include <PubSubClient.h>
-// extern PubSubClient PubSubClient_client;
+
 	#define MAX_MODULE 10
-	void PubSubClient_reconnect();
-	enum mModule{
-		mn_sensor,
-		mn_relay,
-		mn_light,
-		mn_unk
-	};
-	enum mType{
-		mt_sensor,
-		mt_relay,
-		mt_lightDimmer,
-		mt_lightRGB,
-		mt_lightRGBW,
-		mt_unk
-	};
-	enum relayType{
-		rt_light,
-		rt_plug,
-		rt_unk
-	};
-	enum sensorType{
-		st_soilmoisture,
-		st_dht22,
-		st_ds18b20,
-		st_unk
-	};	
+
+	void adriiot_print_SPIFF(String path = "");
+
+	extern adri_socket socketServer;
+
+	void _whenWebsocketIsConnect();
+
+
+
+// region ################################################ mod
+		/** @enum mapper::mModule
+		 *  \author Adrilignthing
+		 *  @brief 	module mod 
+		 */
+		enum mModule{
+			mn_sensor, /** sensor module */
+			mn_relay,
+			mn_light,
+			mn_unk
+		};
+		enum mType{
+			mt_sensor,
+			mt_relay,
+			mt_lightDimmer,
+			mt_lightRGB,
+			mt_lightRGBW,
+			mt_unk
+		};
+		enum mRelayType{
+			rt_light,
+			rt_plug,
+			rt_unk
+		};
+		/**
+		 * @brief      { enum_description }
+		 */
+		enum mSensorType{
+			st_soilmoisture,
+			st_dht22,
+			st_ds18b20,
+			st_unk
+		};	
+
+		enum mMqttPlatforme
+		{
+			mp_domoticz,
+			mp_none
+
+		};		
+// endregion >>>> mod	
+
+// region ################################################ moduleClass
 	class moduleClass
 	{
 		private:
@@ -45,30 +65,34 @@
 			int 		_nameId		= -1;
 			mModule		_mName 		= mn_unk;
 			mType 		_mType 		= mt_unk;
-			relayType	_rType 		= rt_unk;
-			sensorType	_sType 		= st_unk;
+			mRelayType	_rType 		= rt_unk;
+			mSensorType	_sType 		= st_unk;
 			int 		_pin 		= -1;
 			int 		_id 		= -1;
 		public:
 			int 		_mqttidx	= -1;
 			int 		_numLeds	= -1;
 
-			moduleClass(mModule mName, mType moType, relayType rType, sensorType sType, int pin, int numLeds, String username);
-			moduleClass(mModule name, mType module_type, relayType relay_type, sensorType sType, int pin, String username);
+			moduleClass(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, int numLeds, String username);
+			moduleClass(mModule name, mType module_type, mRelayType relay_type, mSensorType sType, int pin, String username);
 			// ~adriiot_module();
 
 			void id_get(int & ret);
 			void nameId_get(int & ret);
-			void sType_get(sensorType & ret);
+			void sType_get(mSensorType & ret);
 			void mType_get(mType & ret);
+			void rType_get(mRelayType & ret);
+			void mName_get(mModule & ret);
 			void username_get(String & ret);
 			void create();
 			void print();
 			void json_value(JsonObject & root);
 			void json_domoticz_value(JsonObject & root);
 			void json(JsonObject & root);
-	};
+	};	
+// endregion >>>> moduleClass
 
+// region ################################################ moduleManagment_spiff
 	class moduleManagment_spiff
 	{
 		String mListeFileName = "/spiff_mListe.txt";
@@ -76,11 +100,14 @@
 	public:
 		moduleManagment_spiff();
 		~moduleManagment_spiff(){};
-		void create(mModule mName, mType moType, relayType rType, sensorType sType, int pin, String username, int idx, String & ret);
+		void create(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, String username, int idx, String & ret);
 		void add(int pos, String value);
 		boolean toSpiff();
 		void load(String file);
-	};
+	};	
+// endregion >>>> moduleManagment_spiff
+
+// region ################################################ moduleManagment
 	class moduleManagment
 	{
 		public:
@@ -97,8 +124,8 @@
 			void mqqt_setidx(int idx);
 
 
-			void create(mModule mName, mType moType, relayType rType, sensorType sType, int pin, int numLeds, String username, int idx = -1);
-			void create(mModule mName, mType moType, relayType rType, sensorType sType, int pin, String username, int idx = -1);
+			void create(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, int numLeds, String username, int idx = -1);
+			void create(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, String username, int idx = -1);
 			void create_lightRGB		(int pin, int numLeds, String username, int idx = -1);
 			void create_lightDimmer		(int pin, String username, int idx = -1);
 			void create_temperature		(int pin, String username, int idx = -1);
@@ -106,7 +133,7 @@
 			void create_plug 			(int pin, String username, int idx = -1);
 			void create_light 			(int pin, String username, int idx = -1);
 			void create_light 			(mType type, int pin, String username, int idx = -1);
-			void create_sensor			(sensorType type, int pin, String username, int idx = -1);
+			void create_sensor			(mSensorType type, int pin, String username, int idx = -1);
 
 
 			moduleClass * module(int pos);
@@ -153,23 +180,25 @@
 
 			void mNameToString(mModule value, String & result); 
 			void mTypeToString(mType value, String & result); 	
-			void rTypeToString(relayType value, String & result); 	
-			void sTypeToString(sensorType value, String & result); 	
+			void rTypeToString(mRelayType value, String & result); 	
+			void sTypeToString(mSensorType value, String & result); 	
 
 			void domoticz_modules_upadte(int idx, int nValue, int sValue);
 
-	};
+	};	
+// endregion >>>> moduleManagment
 
+// region ################################################ adriiot_domoticz
 	class adriiot_domoticz
 	{
 	private:
 	public:
 		adriiot_domoticz();
 		void update_module(DynamicJsonDocument json, int debug);
-	};
+	};	
+// endregion >>>> adriiot_domoticz
 
-// ############################################
-
+// region ################################################ adriiot_mqtt
 	class adriiot_mqtt 
 	{
 		const char 		* _topicin		= "in";
@@ -177,8 +206,9 @@
 		const char 		* _serverIp  	= "out";
 		PubSubClient 	* 	_client;
 		uint16_t		_serverPort 	= 1883;
+		mMqttPlatforme	_mqttPlatforme 	= mp_none;
 	public:
-		adriiot_mqtt(const char * topicin, const char * topicout, const char * serverIp);
+		adriiot_mqtt(const char * topicin, const char * topicout, const char * serverIp, mMqttPlatforme mqttPlatforme);
 		~adriiot_mqtt(){};
 		static void callback(char* topic, byte* payload, unsigned int length);
 		void domoticz_parse(String json);
@@ -188,14 +218,9 @@
 		void publish(const char* payload);
 		void publish(String jsonStr);
 	};
+// endregion >>>> adriiot_mqtt
 
-
-
-void adriiot_print_SPIFF(String path = "");
-extern adri_socket socketServer;
-void _whenWebsocketIsConnect();
-
-
+// region ################################################ adriiot_main
 	class adriiot_main
 	{
 
@@ -213,14 +238,14 @@ void _whenWebsocketIsConnect();
 			adriiot_mqtt 			* _adriiot_mqtt		= nullptr;
 			adriiot_domoticz		* _adriiot_domoticz	= nullptr;
 
-			adriTools_logger 		* _looger;
+			adriToolsLogger 		* _looger;
 			adri_toolsV2 			* _tools;
 
-			boolean 				_isArdiotMQTT = false;
+			mMqttPlatforme			_mqttPlatforme = mp_none;
 
 			adriiot_main(
 					const char * hName,
-					boolean adriiotMQTT = false, 
+					mMqttPlatforme mqttPlatforme = mp_none, 
 					const char * topicin = "", 
 					const char * topicout = "", 
 					const char * serverIp = ""
@@ -236,6 +261,7 @@ void _whenWebsocketIsConnect();
 			void 	mqqt_send(String msg, int debug);
 			void 	dashboard_webClient_update(String msg, int debug);
 			void 	dashboard_webClient_update(int pos, int debug);
+			void 	dashboard_socket_update(int pos, int debug);
 
 			
 			void loop();
@@ -243,5 +269,81 @@ void _whenWebsocketIsConnect();
 		
 	};
 
+// endregion >>>> 	
 
-#endif // adriiot_MAIN_H
+// region ################################################ TFT HOME
+#if ADRIIOT_TFT==ADRIIOT_TFTILI9341
+	class adriiot_tft_home  {
+		private:
+			
+			int _pos = 0;
+			adriTFTUI_txtBox * _txtBox[10];
+			adriTFTUI_txtBox * _txtBoxValue[10];
+			int _aX[10];
+			int _aY[10];
+			int _sX = 20;
+			int _sY = 120;
+		public:
+			adriiot_tft_home() ;
+			void init();
+			void update(int pos);
+	};	
+	adriiot_tft_home * adriiot_tft_home_ptr;
+	adriiot_tft_home * adriiot_tft_home_ptrGet(){
+		return adriiot_tft_home_ptr;
+	}	
+#endif
+// endregion >>>> TFT HOME
+// region ################################################ TFT DEVICE
+#if ADRIIOT_TFT==ADRIIOT_TFTILI9341
+	class adriiot_tft_device  {
+		private:
+			
+			int _pos = 1;
+			adriTFTUI_txtBox * _txtBox[10];
+			adriTFTUI_txtBox * _txtBoxValue[10];
+			int _aX[10];
+			int _aY[10];
+			int _sX = 15;
+			int _sY = 12;
+			int device_pos;
+			adri_timer * _timer;
+		public:
+			boolean _init[10];
+			
+			adriiot_tft_device() ;
+			void init();
+			void update(int pos);
+	};	
+	adriiot_tft_device * adriiot_tft_device_ptr;
+	adriiot_tft_device * adriiot_tft_device_ptrGet(){
+		return adriiot_tft_device_ptr;
+	}	
+#endif
+// endregion >>>> TFT DEVICE
+void adriiot_tft_update(int pos) {
+	adriiot_tft_device_ptr->update(pos);
+	adriiot_tft_home_ptr->update(pos);
+}
+
+
+	// ############################################
+
+	#include "adriiot_core.h"
+
+	// ############################################
+
+	#include "adriiot_modulemanagment.h"
+
+	// ############################################
+
+	#include "adriiot_moduleclass.h"
+
+	// ############################################
+#if ADRIIOT_TFT==ADRIIOT_TFTILI9341
+	#include "adriiot_tft.h"
+#endif
+	// ############################################
+
+
+

@@ -1,0 +1,14 @@
+digraph "moduleManagment::jsonObject_modulesValue"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="moduleManagment::jsonObject\l_modulesValue",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="moduleManagment::getByName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmodule_managment.html#a86890f4c1c76fbda02c1d6937133f1c9",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="moduleClass::username_get",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmodule_class.html#a3da842727f726e02ffc0e1da5f018762",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="moduleClass::json_value",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmodule_class.html#ab38070e15e349d3f01a2e88749ee07c1",tooltip=" "];
+}

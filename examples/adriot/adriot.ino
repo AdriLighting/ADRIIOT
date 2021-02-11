@@ -2,19 +2,25 @@ ADC_MODE(ADC_VCC); 		// FOR TEST AS SENSOR MODULE
 
 #include <Adafruit_Sensor.h>
 
-#define adriiot_MQTT 	1
-#define MQTT 			adriiot_MQTT
+
 #define ADRIOTOOLS_USETELNET
 
+#define ADRIIOT_TFTILI9341 	1
+#define ADRIIOT_TFTOLED 	2
+#define ADRIIOT_TFT 		ADRIIOT_TFTILI9341
+
+#define ADRIIOT_MQTT 	1
+#define ADRIIOTMQTT		ADRIIOT_MQTT
+
+#define ADRIOTOOLS_USELOGGER 1
+
 #include "secret.h"
+
 #include <adriiot.h>
 
-// region ################################################ PTR
-#if MQTT == adriiot_UNOIOT
-	#include <adriiot_arduinoiot.h>
-	WiFiConnectionHandler 	ArduinoIoTPreferredConnection(SSID, PASS);	
-#endif
 
+
+// region ################################################ PTR
 adri_webserver			clientServer(80);
 adri_socket				socketServer(81);	
 
@@ -31,30 +37,36 @@ int 					setup_id = -1;
 adri_telnet * _adri_telnet;	
 #endif
 
+#if ADRIIOT_TFT==ADRIIOT_TFTILI9341
+tft_ui * _tft_ui;
+#endif
 // endregion >>>> PTR
+
+
 
 void setup()
 {
 
 	Serial.begin(115200);
   	for(unsigned long const serialBeginTime = millis(); !Serial && (millis() - serialBeginTime > 5000); ) { }
-  	fsprintf("\n##################################################\n\n");
+  	Serial.println(F("\n##################################################\n\n"));
 
 // region ################################################ TOOLS
-	_tools = new adri_toolsV2();
-
+	int freeHeap = ESP.getFreeHeap();
+	Serial.printf("\n[freeHeap] %d", freeHeap);  	
+	_tools = new adri_toolsV2(1024);
+	_tools->heap_print();	
 	_tools->ESP_core_info();
 	_tools->tempStr_print();
 	_tools->ESP_flash_info();
 	_tools->tempStr_print();
 	_tools->ESP_boot_info();
-	_tools->tempStr_print();	
-
+	_tools->tempStr_print();
 // endregion >>>> TOOLS
 
 // region ################################################ CONSTRUCTOR
-  	#if MQTT == adriiot_MQTT
-		adriiotMain = new adriiot_main((char *)"adriiot", true, "domoticz/in", "domoticz/out", "192.168.0.135");  	
+  	#if ADRIIOTMQTT == ADRIIOT_MQTT
+		adriiotMain = new adriiot_main((char *)"adriiot", mp_domoticz, "domoticz/in", "domoticz/out", "192.168.0.135");  	
   	#else
   		adriiotMain = new adriiot_main((char *)"adriiot");
   	#endif		
@@ -94,20 +106,20 @@ void setup()
 // endregion >>>> telenet
 
 // region ################################################ logger
-	adriTools_logger * _looger = adriTools_logger_ptrGet();
-	_looger->activateByVariable_add("module check");
-	_looger->activateByVariable_add("sockett receive/send"); 	
-	_looger->activateByVariable_add("mqtt receive/send"); 	
-	_looger->activateByVariable_add("mqtt parse"); 	
-	_looger->activateByVariable_add("sockett parse"); 	
-	_looger->activateByVariable_toggleAddLine(0);
-	_looger->activateByVariable_toggleSerial(0);
-	_looger->activateByVariable_toggleSerial(1);
-	_looger->activateByVariable_toggleSerial(2);
-	_looger->activateByVariable_toggleSerial(3);
-	_looger->activateByVariable_toggleSerial(4);
-	_looger->spiffAddLine_otherRegion_toggle();
-	_looger->spiff_toggle();
+	adriToolsLogger * _looger = adriToolsLogger_ptrGet();
+	_looger->activateByRegion_add("module check");
+	_looger->activateByRegion_add("sockett receive/send"); 	
+	_looger->activateByRegion_add("mqtt receive/send"); 	
+	_looger->activateByRegion_add("mqtt parse"); 	
+	_looger->activateByRegion_add("sockett parse"); 	
+	// _looger->activateByRegion_toggleAddLine(0);
+	// _looger->activateByRegion_toggleSerial(0);
+	// _looger->activateByRegion_toggleSerial(1);
+	// _looger->activateByRegion_toggleSerial(2);
+	// _looger->activateByRegion_toggleSerial(3);
+	// _looger->activateByRegion_toggleSerial(4);
+	// _looger->spiffAddLine_otherRegion_toggle();
+	// _looger->spiff_toggle();
 // endregion >>>> logger
 
 // region ################################################ MODULE FROM SPIFF
@@ -127,12 +139,11 @@ void setup()
 //					adriiot_spiff->load(json); 																											// CREATE FROM JSON FILE
 //	
 //											STRIP RGB/RGBW Drived by Adafruit neopixel	
-//	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led",			1); 			// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_lightRGB(		D5,10,	"rgb",				7		); 															// 1 |LEDS BUIT-IN BLUE
+	adriiotMain->_moduleManagment->create_lightRGB(		4,10,	"ruban led rgb",	7		); 															// 1 |LEDS BUIT-IN BLUE
 	                                            		  		            		 		   															// 				
 //											RELAY POUR CONTROLLER UN ECLAIRAGE 0/220	
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led",			1); 			// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_light(		2,		"blue_led", 		1		); 															// 1 |LEDS BUIT-IN BLUE
+	// adriiotMain->_moduleManagment->create_light(		2,		"blue_led", 		1		); 															// 1 |LEDS BUIT-IN BLUE
 
 // 											CONTROLLER UN ECLAIRAGE AVEC VARIATION DE LA LUMINOSITÉE PAR RELAY 
 //	adriiotMain->_moduleManagment->create(	mn_light, 	mt_lightDimmer,	rt_unk,			st_unk, 			16,		"red_led",			2); 			// 0 |CREATE WITH MOD
@@ -143,43 +154,85 @@ void setup()
 
 // 											CAPTEUR DE TYPE DHT22 POUR LA TEMPÉRATURE ET L'HUMIDITÉE
 //	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_dht22, 			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_temperature(	4,		"chambre d'adri", 	3 		); 															// 1 |DHT22
+	// adriiotMain->_moduleManagment->create_temperature(	4,		"chambre d'adri", 	3 		); 															// 1 |DHT22
 	                                                 	   		                  	  		   															// 
 //	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_ds18b20,			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
 	adriiotMain->_moduleManagment->create_temperatureEx(5,		"ds2812b", 			6 		); 															// 1 |DS18B20 	
 
 // 											RELAY POUR CONTROLLER UNE PRISE 0/220
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_plug, 		st_unk, 			D5,		"prise",			4);				// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_plug(			D4, 	"machinne a café",	4		); 	 														// 1 |NULL
+	adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a café",	4		); 	 														// 1 |NULL
+	adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a bobnbon",	4		); 	 														// 1 |NULL
+	adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a biére",	4		); 	 														// 1 |NULL
 // endregion >>>> MODULES
 
+// region ################################################ wificonnect
 	delay(1000);
-	adriiotMain->_moduleManagment->getIdByName("rgb", setup_id);	                                           			    	                  	 		   	 														// 
+	adriiotMain->_moduleManagment->getIdByName("ruban led rgb", setup_id);	                                           			    	                  	 		   	 														// 
 	adriiotMain->_RGBneoManagment->module(setup_id)->leds_rgb(255, 0, 0);
 
 	adriiotMain->wifiConnect(SECRET_SSID, SECRET_PASS);	
 
-	adriiotMain->_RGBneoManagment->module(setup_id)->leds_rgb(0, 255, 0);
+	adriiotMain->_RGBneoManagment->module(setup_id)->leds_rgb(0, 255, 0);	
+// endregion >>>> wificonnect
 
 	#ifdef ADRIOTOOLS_USETELNET
-	adri_toolsv2Ptr_get()->_telnetSetup();	
+		adri_toolsv2Ptr_get()->_telnetSetup();	
 	#endif
+
 	
-	timerCloud = new adri_timer(5000, "", true)	;
+// region ################################################ tft
+	#if ADRIIOT_TFT==ADRIIOT_TFTILI9341
+		meteo_update(true); 
+
+		_tft_ui = new tft_ui();
+
+		adriTFTscreen_set_pos(0);
+		adriTFTscreen_display();
+			
+		new adriiot_tft_home();	
+		new adriiot_tft_device();	
+
+		int count = adriiot_main_ptrGet()->_moduleManagment->_pos;
+		for (int i = 0; i < count; ++i)
+		{
+			adriiot_tft_update(i);
+		}
+	#endif
+// endregion >>>> tft
+
+	timerCloud = new adri_timer(60000, "", true)	;
+
+	_tools->heap_print();
 }
 
 
 void loop()
 {
 
-	if (timerCloud->loop_stop()) {
-		adriTools_logger_ptrGet()->activateByVariable_toggleAddLine(0);
+	// if (timerCloud->loop_stop()) {
+	if (timerCloud->loop()) {
+		// adriTFTscreen_next(1);
+		// int count = adriiot_main_ptrGet()->_moduleManagment->_pos;
+		// for (int i = 0; i < 10; ++i)
+		// {
+		// 	adriiot_tft_device_ptr->_init[i] = false;
+		// }			
+		// for (int i = 0; i < count; ++i)
+		// {
+		// 	adriiot_tft_update(i);
+		// }		
+		// adriToolsLogger_ptrGet()->activateByRegion_toggleAddLine(0);
+
 	}
 
 	_serial->loop();
 
 	adriiotMain->loop();
 
+	#if ADRIIOT_TFT==ADRIIOT_TFTILI9341
+		_tft_ui->mainLoop();
+	#endif
 }
 
 
@@ -191,26 +244,20 @@ void loop()
 */
 
 // region ################################################ USERMENU FUNCTION
-#if MQTT == adriiot_UNOIOT
-	void onAicRelayChange(){
-		adriiotMain->_moduleManagment->getIdByName("red_led", setup_id);
-		adriiotMain->_relayManagment->module(setup_id)->toggle();
-		adriiotMain->_relayManagment->module(setup_id)->getStatus(aic_relay);
-	}
-#endif
+
 
 String _serial_menu(String cmd, String value) {
     adriToolsv2_serialReadPtr_get()->menu();
     return "";
 }
 void _whenWebsocketIsConnect(){
-	ADRI_LOG(1, 2, 0, "<<<", "");
+	ADRI_LOG(1, -1, 0, "<<<", "");
 	ADRI_LOG(1, 0, 2, "", "");
 	String json;
 	adriiotMain->_moduleManagment->json_modulesValueList(json, 1);
 	adriiotMain->socket_send(json, 1);	
 	ADRI_LOG(1, 1, 2, "", "");
-	ADRI_LOG(1, 2, 0, ">>>", "");
+	ADRI_LOG(1, -1, 0, ">>>", "");
 }	
 String _serial_websocket(String cmd, String value){
 	String json;
@@ -229,8 +276,7 @@ String _serial_ESPreset(String cmd, String value){
     return "";
 }	
 String _serial_freeHeap(String cmd, String value){
-	int freeHeap = ESP.getFreeHeap();
-	fsprintf("\n[freeHeap] %d", freeHeap);
+	_tools->heap_print();	
 	return "";
 }		
 String _serial_print(String cmd, String value){
@@ -275,3 +321,54 @@ String _serial_adriTrace(String cmd, String value){
 // endregion >>>> USERMENU FUNCTION
  
 //	#####################################################################################################
+
+
+
+
+
+
+
+
+
+/*
+
+
+// region ################################################ MODULES
+	// 	INITIALISATION DES MODULES POUR TEST (10MODULES MAX)
+	// 								PARAM :
+	// 	0									MODULE 		TYPE DE MODULE 	TYPE DE RELAY	TYPE DE SENSOR 		PIN 	USERNAME			MQTTIDX	
+	// 	1												PIN		USERNAME			MQTT IDX
+	// 	2																																		RESULT AS STRING
+	// 																																			
+// 											RELAY POUR CONTROLLER UN ECLAIRAGE 0/220											
+//					adriiot_spiff->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led", 		1, 		json); 	// 2 |MODULE TO JSON FILE
+//					adriiot_spiff->load(json); 																											// CREATE FROM JSON FILE
+//	
+//											STRIP RGB/RGBW Drived by Adafruit neopixel	
+//	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led",			1); 			// 0 |CREATE WITH MOD
+	adriiotMain->_moduleManagment->create_lightRGB(		D5,10,	"rgb",				7		); 															// 1 |LEDS BUIT-IN BLUE
+	                                            		  		            		 		   															// 				
+//											RELAY POUR CONTROLLER UN ECLAIRAGE 0/220	
+//	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led",			1); 			// 0 |CREATE WITH MOD
+	adriiotMain->_moduleManagment->create_light(		2,		"blue_led", 		1		); 															// 1 |LEDS BUIT-IN BLUE
+
+// 											CONTROLLER UN ECLAIRAGE AVEC VARIATION DE LA LUMINOSITÉE PAR RELAY 
+//	adriiotMain->_moduleManagment->create(	mn_light, 	mt_lightDimmer,	rt_unk,			st_unk, 			16,		"red_led",			2); 			// 0 |CREATE WITH MOD
+	adriiotMain->_moduleManagment->create_lightDimmer(	16,		"red_led",  		2		); 															// 1 |LEDS BUIT-IN RED	
+
+// 											CAPTEUR DE TYPE ANALOG POUR HUMIDITÉE DU SOL
+	// adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_soilmoisture, 	A0,		"ADC", 		5);						// 0 |ESP.getvcc()
+
+// 											CAPTEUR DE TYPE DHT22 POUR LA TEMPÉRATURE ET L'HUMIDITÉE
+//	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_dht22, 			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
+	adriiotMain->_moduleManagment->create_temperature(	4,		"chambre d'adri", 	3 		); 															// 1 |DHT22
+	                                                 	   		                  	  		   															// 
+//	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_ds18b20,			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
+	adriiotMain->_moduleManagment->create_temperatureEx(5,		"ds2812b", 			6 		); 															// 1 |DS18B20 	
+
+// 											RELAY POUR CONTROLLER UNE PRISE 0/220
+//	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_plug, 		st_unk, 			D5,		"prise",			4);				// 0 |CREATE WITH MOD
+	adriiotMain->_moduleMan
+
+
+*/

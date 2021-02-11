@@ -26,15 +26,15 @@ void moduleManagment::create_plug 			(int pin, String username, int idx){create(
 void moduleManagment::create_light 			(int pin, String username, int idx){create(mn_relay, 	mt_relay, 		rt_light, 	st_unk, 		pin, username, idx);}
 void moduleManagment::create_light 			(mType type, int pin, String username, int idx){	
 																				create(mn_light, 	type,			rt_unk, 	st_unk, 		pin, username, idx);}
-void moduleManagment::create_sensor			(sensorType type, int pin, String username, int idx){
+void moduleManagment::create_sensor			(mSensorType type, int pin, String username, int idx){
 																				create(mn_sensor, 	mt_sensor, 		rt_unk, 	type, 			pin, username, idx);}
 
-void moduleManagment::create(mModule mName, mType moType, relayType rType, sensorType sType, int pin, int numLeds, String username, int idx){
+void moduleManagment::create(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, int numLeds, String username, int idx){
 	moduleClassArray[_pos] = new moduleClass(mName, moType, rType, sType, pin, numLeds, username);
 	moduleClassArray[_pos]->_mqttidx = idx;
 	_pos++;
 }	
-void moduleManagment::create(mModule mName, mType moType, relayType rType, sensorType sType, int pin, String username, int idx){
+void moduleManagment::create(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, String username, int idx){
 	moduleClassArray[_pos] = new moduleClass(mName, moType, rType, sType, pin, username);
 	moduleClassArray[_pos]->_mqttidx = idx;
 	_pos++;
@@ -103,7 +103,7 @@ void moduleManagment::json_modulesValueList(String & ret, int debug){
 // region ################################################ ALL MODULES VALUE
 void moduleManagment::jsonObject_modulesValue(JsonObject & root){
 	int 		id;
-	sensorType	sType;
+	mSensorType	sType;
 	for (int i = 0; i < _pos; ++i) {
 		moduleClassArray[i]->id_get(id);
 		moduleClassArray[i]->sType_get(sType);
@@ -126,7 +126,7 @@ void moduleManagment::json_modulesValue(String & ret, int debug){
 // region ################################################ MODULE VALUE BY POS
 void moduleManagment::jsonObject_modulesValue(int pos, JsonObject & root){
 	int 		id;
-	sensorType	sType;
+	mSensorType	sType;
 	moduleClassArray[pos]->id_get(id);
 	moduleClassArray[pos]->sType_get(sType);
 	moduleClassArray[pos]->json_value(root);
@@ -198,7 +198,7 @@ void moduleManagment::json_modules(String & ret, int debug){
 // region ################################################ ALL MODULES VALUE
 void moduleManagment::jsonObject_domoticz_modulesValue(JsonObject & root){
 	int 		id;
-	sensorType	sType;
+	mSensorType	sType;
 	for (int i = 0; i < _pos; ++i) {
 		JsonObject object = root.createNestedObject(String(i));
 		moduleClassArray[i]->id_get(id);
@@ -213,7 +213,7 @@ void moduleManagment::json_domoticz_modulesValue(String & ret, int debug){
 	int 		id;
 	String 		username;
 	char 		buffer[512];
-	sensorType	sType;
+	mSensorType	sType;
 	for (int i = 0; i < _pos; ++i) {
 		
 		JsonObject root = json.to<JsonObject>();
@@ -236,7 +236,7 @@ void moduleManagment::json_domoticz_modulesValue(String & ret, int debug){
 // region ################################################ MODULE VALUE BY POS
 void moduleManagment::jsonObject_domoticz_modulesValue(int pos, JsonObject & root){
 	int 		id;
-	sensorType	sType;
+	mSensorType	sType;
 		moduleClassArray[pos]->id_get(id);
 		moduleClassArray[pos]->sType_get(sType);
 		moduleClassArray[pos]->json_domoticz_value(root);
@@ -280,14 +280,14 @@ void moduleManagment::mTypeToString(mType value, String & result){
 	    default: 				result = "";				break;
 	}
 }
-void moduleManagment::rTypeToString(relayType value, String & result){
+void moduleManagment::rTypeToString(mRelayType value, String & result){
 	switch (value) {
 	    case rt_light:			result = "luminaire";					break;
 	    case rt_plug: 			result = "prise de courrant";			break;
 	    default: 				result = "";							break;
 	}
 }
-void moduleManagment::sTypeToString(sensorType value, String & result){
+void moduleManagment::sTypeToString(mSensorType value, String & result){
 	switch (value) {
 	    case st_soilmoisture:	result = "soilmoisture";	break;
 	    case st_dht22:			result = "dht22";		break;
@@ -363,7 +363,7 @@ void moduleManagment::json_mType(String & ret){
 }	
 // endregion >>>> MOD MODULE TYPE TO JSON
 // region ################################################ MOD RELAY TYPE TO JSON
-relayType rTypeArray[] { 
+mRelayType rTypeArray[] { 
     rt_light,
     rt_plug,
     rt_unk
@@ -379,7 +379,7 @@ void moduleManagment::json_rType(String & ret){
 	const size_t serializeSize = 512 * 2;	
 	DynamicJsonDocument json(serializeSize);
 	JsonObject root = json.to<JsonObject>();
-	JsonObject object = root.createNestedObject(F("relayType"));
+	JsonObject object = root.createNestedObject(F("mRelayType"));
 	jsonObject_rtype(object);
 	ret= "";
 	serializeJson(json, ret);
@@ -395,7 +395,7 @@ void moduleManagment::json_rType(String & ret){
 // endregion >>>> MOD RELAY TYPE TO JSON
 
 // region ################################################ MOD SENSOR TYPE TO JSON
-sensorType sensorTypeArray[] { 
+mSensorType sensorTypeArray[] { 
     st_soilmoisture,
     st_dht22,
     st_ds18b20,
@@ -412,7 +412,7 @@ void moduleManagment::json_sType(String & ret){
 	const size_t serializeSize = 512 * 2;	
 	DynamicJsonDocument json(serializeSize);
 	JsonObject root = json.to<JsonObject>();
-	JsonObject object = root.createNestedObject(F("sensorType"));
+	JsonObject object = root.createNestedObject(F("mSensorType"));
 	jsonObject_stype(object);
 	ret= "";
 	serializeJson(json, ret);
@@ -436,7 +436,6 @@ void moduleManagment::json_sType(String & ret){
 
 // region ################################################ UPDATE MODULE VALUE TO SOCKET && MQTT
 void moduleManagment::modulesValue_check(){
-
 	if (modulesValue_checkTimer->loop()) {
 
 		if (modulesValue_checkTimer->_duration_max != 1000) modulesValue_checkTimer->set_duration_max(1000);
@@ -446,7 +445,7 @@ void moduleManagment::modulesValue_check(){
 		int			nameId;
 		String 		s;
 		String 		n;
-		sensorType 	sType;
+		mSensorType 	sType;
 		mType 		moduleType;
 		int 		debug = 0;
 		
@@ -475,6 +474,7 @@ void moduleManagment::modulesValue_check(){
 
 				if ( modulesValue[i] == "") {
 					ADRI_LOG(debug, -1, 0, "<<<", "");
+					adriToolsLogger_ptrGet()->region_start(debug);
 					ADRI_LOG(debug, 0, 2, "%s",n.c_str());
 					modulesValue[i] = s;
 					#ifdef DEBUG
@@ -482,6 +482,7 @@ void moduleManagment::modulesValue_check(){
 					#endif
 					adriiot_mainPtr->dashboard_webClient_update(i, debug);					
 					ADRI_LOG(debug, 1, 2, "","");
+					adriToolsLogger_ptrGet()->region_end(debug);
 					ADRI_LOG(debug, -1, 0, ">>>", "");	
 				} else {
 
@@ -498,19 +499,22 @@ void moduleManagment::modulesValue_check(){
 					if (sType==st_soilmoisture) {
 						if (diff>5 ) {
 							ADRI_LOG(debug, -1, 0, "<<<", "");
+							adriToolsLogger_ptrGet()->region_start(debug);
 							ADRI_LOG(debug, 0, 2, "%s", n.c_str());
 							modulesValue[i] = s;
 							#ifdef DEBUG
 								fsprintf("[%S] st_soilmoisture ar changed\n\t[v1: %.2f - v2: %.2f] %s\n", n.c_str() ,v1, v2, s.c_str());	
 							#endif
 							adriiot_mainPtr->dashboard_webClient_update(i, debug);	
-							ADRI_LOG(debug, 1, 2, "","");	
+							ADRI_LOG(debug, 1, 2, "","");
+							adriToolsLogger_ptrGet()->region_end(debug);	
 							ADRI_LOG(debug, -1, 0, ">>>", "");				
 						}						
 					}
 					if (sType==st_dht22) {
 						if (diff>=(float)0.2 ) {
 							ADRI_LOG(debug, -1, 0, "<<<", "");
+							adriToolsLogger_ptrGet()->region_start(debug);
 							ADRI_LOG(debug, 0, 2, "%s", n.c_str());
 							modulesValue[i] = s;
 							#ifdef DEBUG
@@ -518,12 +522,14 @@ void moduleManagment::modulesValue_check(){
 							#endif	
 							adriiot_mainPtr->dashboard_webClient_update(i, debug);	
 							ADRI_LOG(debug, 1, 2, "","");
+							adriToolsLogger_ptrGet()->region_end(debug);
 							ADRI_LOG(debug, -1, 0, ">>>", "");	
 						}						
 					}	
 					if (sType==st_ds18b20) {
 						if (diff>=(float)0.8 ) {
 							ADRI_LOG(debug, -1, 0, "<<<", "");
+							adriToolsLogger_ptrGet()->region_start(debug);
 							ADRI_LOG(debug, 0, 2, "%s",n.c_str());
 							modulesValue[i] = s;
 							#ifdef DEBUG
@@ -531,6 +537,7 @@ void moduleManagment::modulesValue_check(){
 							#endif	
 							adriiot_mainPtr->dashboard_webClient_update(i, debug);	
 							ADRI_LOG(debug, 1, 2, "","");
+							adriToolsLogger_ptrGet()->region_end(debug);
 							ADRI_LOG(debug, -1, 0, ">>>", "");	
 						}						
 					}									
@@ -538,6 +545,7 @@ void moduleManagment::modulesValue_check(){
 			} else {
 				if (s != modulesValue[i]) {
 					ADRI_LOG(debug, -1, 0, "<<<", "");
+					adriToolsLogger_ptrGet()->region_start(debug);
 					ADRI_LOG(debug, 0, 2, "%s", n.c_str());
 					modulesValue[i] = s;
 					#ifdef DEBUG
@@ -545,7 +553,9 @@ void moduleManagment::modulesValue_check(){
 					#endif
 					adriiot_mainPtr->dashboard_webClient_update(i, debug);	
 					ADRI_LOG(debug, 1, 2, "","");
+					adriToolsLogger_ptrGet()->region_end(debug);
 					ADRI_LOG(debug, -1, 0, ">>>", "");	
+
 				}
 			}
 		}	
@@ -573,14 +583,14 @@ void adriiot_domoticz::update_module(DynamicJsonDocument oject, int debug){
 
 	moduleManagment * _module = adriiot_mainPtr->_moduleManagment;
 
-	ADRI_LOGV(debug, 0, 2, _module->_pos, "", "");
+	ADRI_LOG(debug, 0, 2, "", "");
 
 	for (int i = 0; i < _module->_pos; ++i) {
 
 		if (moduleClassArray[i]->_mqttidx == idx) {
 
 			int 		id;
-			sensorType 	sType;
+			mSensorType 	sType;
 			mType 		moduleType;
 			moduleClassArray[i]->mType_get(moduleType);
 			moduleClassArray[i]->sType_get(sType);
@@ -662,10 +672,9 @@ void adriiot_domoticz::update_module(DynamicJsonDocument oject, int debug){
 			String s = "";
 			_module->json_modulesValue(i, s, debug);
 			_module->modulesValue[i] = s;
-
+			adriiot_mainPtr->dashboard_socket_update(i, debug);
 			_module->modulesValue_checkTimer->set_duration_max(5000);
 			// _module->modulesValue_checkTimer->activate();
-
 			break;
 
 		}	
@@ -714,7 +723,7 @@ boolean moduleManagment_spiff::toSpiff() {
 // endregion >>>> ARRAY MANAGEMENT ?????
 
 // region ################################################ CREATE MODULE TO JSON
-void moduleManagment_spiff::create(mModule mName, mType moType, relayType rType, sensorType sType, int pin, String username, int idx, String & ret){
+void moduleManagment_spiff::create(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, String username, int idx, String & ret){
 	const size_t serializeSize = 512 * 2;	
 	DynamicJsonDocument json(serializeSize);
 	JsonObject object = json.to<JsonObject>();

@@ -603,29 +603,29 @@ function html_createCardSwitch_plug_home(div_name, cnt){
 }
 // 	INITIIALISE
 function gui_initialize(){
-	html_createCardSwitch("replace_rgb", 10, true,'colorpicker', 'bulb-eco', true);
+	// html_createCardSwitch("replace_rgb", 10, true,'colorpicker', 'bulb-eco', true);
 
 
 
-	// 		let text = new ColorPicker(document.getElementById('text'), '#1a00ad');
- // var cars = ["Saab", "text", "BMW"]; 
+	// // 		let text = new ColorPicker(document.getElementById('text'), '#1a00ad');
+ // // var cars = ["Saab", "text", "BMW"]; 
 
-	// 		for (var i = 0; i < 2; i++) {
-	// 			if (document.getElementById(cars[i]) == null) continue;
-	// 			document.getElementById(cars[i]).addEventListener('colorChange', function () {
-	// 				console.log(event.detail);
-	// 				document.getElementById('te').style.color = event.detail.color.hexa;
-	// 			});				
-	// 		}
+	// // 		for (var i = 0; i < 2; i++) {
+	// // 			if (document.getElementById(cars[i]) == null) continue;
+	// // 			document.getElementById(cars[i]).addEventListener('colorChange', function () {
+	// // 				console.log(event.detail);
+	// // 				document.getElementById('te').style.color = event.detail.color.hexa;
+	// // 			});				
+	// // 		}
 			
-			for (var i = 0; i < 10; i++) {
-				// if (document.getElementById("switch-card-rgb-colorpicker-"+i) == null) continue;
-				let text = new ColorPicker(document.getElementById("switch-card-rgb-colorpicker-"+i), '#1a00ad');
-				document.getElementById("switch-card-rgb-colorpicker-"+i).addEventListener('colorChange', function () {
-					console.log(event.detail);
-					// document.getElementById('te').style.color = event.detail.color.hexa;
-				});				
-			}	
+	// 		for (var i = 0; i < 10; i++) {
+	// 			// if (document.getElementById("switch-card-rgb-colorpicker-"+i) == null) continue;
+	// 			let text = new ColorPicker(document.getElementById("switch-card-rgb-colorpicker-"+i), '#1a00ad');
+	// 			document.getElementById("switch-card-rgb-colorpicker-"+i).addEventListener('colorChange', function () {
+	// 				console.log(event.detail);
+	// 				// document.getElementById('te').style.color = event.detail.color.hexa;
+	// 			});				
+	// 		}	
 	html_createCardSwitch("replace_light", 10, true,'light', 'bulb-eco', false);
 	html_createCardSwitch("replace_ac", 10, true,'plug', 'appliances', false);
 	html_createCardSwitch_home("replace_home_light", 10);

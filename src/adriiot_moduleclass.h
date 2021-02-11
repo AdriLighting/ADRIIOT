@@ -1,5 +1,5 @@
 // region ################################################ CONSTRUCTOR
-moduleClass::moduleClass(mModule mName, mType moType, relayType rType, sensorType sType, int pin, int numLeds, String username){
+moduleClass::moduleClass(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, int numLeds, String username){
 	_nameId 	= adriiot_moduleManagemnt.currentCnt();
 	_name 		= username;
 	_mName 		= mName;	
@@ -11,7 +11,7 @@ moduleClass::moduleClass(mModule mName, mType moType, relayType rType, sensorTyp
 
 	create();
 }	
-moduleClass::moduleClass(mModule mName, mType moType, relayType rType, sensorType sType, int pin, String username){
+moduleClass::moduleClass(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, String username){
 	_nameId = adriiot_moduleManagemnt.currentCnt();
 	_name 	= username;
 	_mName 	= mName;	
@@ -33,12 +33,12 @@ void moduleClass::print(){
 	String 		sName;
 	String 		sType;
 	String 		seType;
-	String 		relayType;
+	String 		mRelayType;
 
 	adriiot_moduleManagemnt.mNameToString(_mName, sName);
 	adriiot_moduleManagemnt.mTypeToString(_mType, sType);
 	adriiot_moduleManagemnt.sTypeToString(_sType, seType);
-	adriiot_moduleManagemnt.rTypeToString(_rType, relayType);
+	adriiot_moduleManagemnt.rTypeToString(_rType, mRelayType);
 
 	fsprintf("[id: %4d][pin: %4d][name: %-15s][module: %15s][type: %15s]",
 		_id,
@@ -98,13 +98,13 @@ void moduleClass::print(){
 	}	
 	switch (valueMod) {
 	    case 0:
-	      	fsprintf("[relayType: %18s][seType: %15s][statu: %10d]\n", relayType.c_str(), seType.c_str(), state);	
+	      	fsprintf("[mRelayType: %18s][seType: %15s][statu: %10d]\n", mRelayType.c_str(), seType.c_str(), state);	
 	    break;
 	    case 1:
-	      	fsprintf("[relayType: %18s][seType: %15s][statu: %10d]\n", relayType.c_str(), seType.c_str(), value);	
+	      	fsprintf("[mRelayType: %18s][seType: %15s][statu: %10d]\n", mRelayType.c_str(), seType.c_str(), value);	
 	    break;
 	    case 2:
-	    	fsprintf("[relayType: %18s][seType: %15s][statu: %10.2f]\n", relayType.c_str(), seType.c_str(), temperature);	
+	    	fsprintf("[mRelayType: %18s][seType: %15s][statu: %10.2f]\n", mRelayType.c_str(), seType.c_str(), temperature);	
 	    break;
 	    default:
 	    	break;
@@ -155,8 +155,10 @@ void moduleClass::nameId_get(int & ret)			{ret = _nameId;}
 // endregion >>>> GET ID
 
 // region ################################################ GET MOD
-void moduleClass::sType_get(sensorType & ret) 	{ret = _sType;}
+void moduleClass::sType_get(mSensorType & ret) 	{ret = _sType;}
 void moduleClass::mType_get(mType & ret) 		{ret = _mType;}	
+void moduleClass::rType_get(mRelayType & ret)	{ret = _rType;}	
+void moduleClass::mName_get(mModule & ret)		{ret = _mName;}	
 // endregion >>>> GET MOD
 
 // region ################################################ GET MODULE VALUE AS JSON  - DOMOTICZ
