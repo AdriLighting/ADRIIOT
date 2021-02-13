@@ -88,6 +88,8 @@ adri_tools_v2_telnet            = https://github.com/AdriLighting/adri_tools_v2_
 esp8266/arduino                 = https://github.com/esp8266/Arduino/tree/master/libraries
 
 Adafruit BusIO                  = https://github.com/adafruit/Adafruit_BusIO
+Adafruit Unified Sensor         = https://github.com/adafruit/Adafruit_Sensor
+JsonStreamingParser             = https://github.com/squix78/json-streaming-parser.git
 TimeLib                         = https://github.com/PaulStoffregen/Time
 ArduinoJson                     = https://github.com/bblanchon/ArduinoJson
 WebSockets                      = https://github.com/Links2004/arduinoWebSockets
@@ -96,6 +98,11 @@ Adafruit GFX Library            = https://github.com/adafruit/Adafruit-GFX-Libra
 XPT2046                         = http://github.com/spapadim/XPT2046
 U8g2_for_Adafruit_GFX           = https://github.com/olikraus/U8g2_for_Adafruit_GFX
 JPEGDecoder                     = https://github.com/Bodmer/JPEGDecoder
+DHT sensor library              = https://github.com/adafruit/DHT-sensor-library
+DallasTemperature               = https://github.com/milesburton/Arduino-Temperature-Control-Library
+OneWire                         = https://github.com/PaulStoffregen/OneWire
+Adafruit NeoPixel               = https://github.com/adafruit/Adafruit_NeoPixel
+PubSubClient                    = https://github.com/knolleary/pubsubclient
 </details>
 Dependency Graph
 <details>
@@ -204,9 +211,6 @@ Dependency Graph
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DHT sensor library] 1.4.1
 |   |   |   |-- [Adafruit Unified Sensor] 1.1.4
-|   |   |-- [adri_tools_v2] 1.0.0
-|   |   |   |-- [ESP8266WiFi] 1.0
-|   |   |   |-- [LittleFS(esp8266)] 0.1.0
 |   |-- [adriiot_DS18B20] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DallasTemperature] 3.9.0
@@ -283,7 +287,6 @@ Dependency Graph
 |   |-- [PubSubClient] 2.8</details>
 </pre>
 
-
 <hr>
 
 #### examples
@@ -338,6 +341,8 @@ adri_tools_v2_telnet            = https://github.com/AdriLighting/adri_tools_v2_
 esp8266/arduino                 = https://github.com/esp8266/Arduino/tree/master/libraries
 
 Adafruit BusIO                  = https://github.com/adafruit/Adafruit_BusIO
+Adafruit Unified Sensor         = https://github.com/adafruit/Adafruit_Sensor
+JsonStreamingParser             = https://github.com/squix78/json-streaming-parser.git
 TimeLib                         = https://github.com/PaulStoffregen/Time
 ArduinoJson                     = https://github.com/bblanchon/ArduinoJson
 WebSockets                      = https://github.com/Links2004/arduinoWebSockets
@@ -346,6 +351,11 @@ Adafruit GFX Library            = https://github.com/adafruit/Adafruit-GFX-Libra
 XPT2046                         = http://github.com/spapadim/XPT2046
 U8g2_for_Adafruit_GFX           = https://github.com/olikraus/U8g2_for_Adafruit_GFX
 JPEGDecoder                     = https://github.com/Bodmer/JPEGDecoder
+DHT sensor library              = https://github.com/adafruit/DHT-sensor-library
+DallasTemperature               = https://github.com/milesburton/Arduino-Temperature-Control-Library
+OneWire                         = https://github.com/PaulStoffregen/OneWire
+Adafruit NeoPixel               = https://github.com/adafruit/Adafruit_NeoPixel
+PubSubClient                    = https://github.com/knolleary/pubsubclient
 </details>
 Dependency Graph
 <details>
@@ -457,9 +467,6 @@ Dependency Graph
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DHT sensor library] 1.4.1
 |   |   |   |-- [Adafruit Unified Sensor] 1.1.4
-|   |   |-- [adri_tools_v2] 1.0.0
-|   |   |   |-- [ESP8266WiFi] 1.0
-|   |   |   |-- [LittleFS(esp8266)] 0.1.0
 |   |-- [adriiot_DS18B20] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DallasTemperature] 3.9.0
