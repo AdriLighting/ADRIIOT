@@ -63,13 +63,13 @@ Librairies
 <details>
 ALS_espwebserver                = https://github.com/AdriLighting/ALS_espwebserver
 
-adriiot                         = https://github.com/AdriLighting/ADRIOT
-adriiot_dht22                   = https://github.com/AdriLighting/ADRIOT_dht22
-adriiot_DS18B20                 = https://github.com/AdriLighting/adriot_DS18B20
+ADRIIOT                         = https://github.com/AdriLighting/ADRIIOT
+ADRIIOT_dht22                   = https://github.com/AdriLighting/ADRIIOT_dht22
+ADRIIOT_DS18B20                 = https://github.com/AdriLighting/ADRIIOT_DS18B20
 ADRIIOT_lightDimmer             = https://github.com/AdriLighting/ADRIIOT_lightDimmer
-adriiot_relay                   = https://github.com/AdriLighting/ADRIOT_relay
+ADRIIOT_relay                   = https://github.com/AdriLighting/ADRIIOT_relay
 ADRIIOT_RGBneo                  = https://github.com/AdriLighting/ADRIIOT_RGBneo
-adriiot_solMoisture             = https://github.com/AdriLighting/ADRIOT_solMoisture
+ADRIIOT_solMoisture             = https://github.com/AdriLighting/ADRIIOT_solMoisture
 
 adri_tools_v2                   = https://github.com/AdriLighting/adri_tools_v2
 adri_ntpTime                    = https://github.com/AdriLighting/adri_ntpTime
@@ -112,7 +112,7 @@ Dependency Graph
 |   |-- [SPI] 1.0
 |-- [Wire] 1.0
 |-- [Adafruit Unified Sensor] 1.1.4
-|-- [adriiot] 1.0.0
+|-- [ADRIIOT] 1.0.0
 |   |-- [JsonStreamingParser] 1.0.5
 |   |-- [adri_tools_v2] 1.0.0
 |   |   |-- [ESP8266WiFi] 1.0
@@ -207,26 +207,23 @@ Dependency Graph
 |   |   |   |-- [SPI] 1.0
 |   |   |-- [Wire] 1.0
 |   |   |-- [SPI] 1.0
-|   |-- [adriiot_dht22] 1.0.0
+|   |-- [ADRIIOT_dht22] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DHT sensor library] 1.4.1
 |   |   |   |-- [Adafruit Unified Sensor] 1.1.4
-|   |-- [adriiot_DS18B20] 1.0.0
+|   |-- [ADRIIOT_DS18B20] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DallasTemperature] 3.9.0
 |   |   |   |-- [OneWire] 2.3.5
 |   |   |-- [OneWire] 2.3.5
 |   |-- [ADRIIOT_lightDimmer] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
-|   |-- [adriiot_relay] 1.0.0
+|   |-- [ADRIIOT_relay] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
-|   |   |-- [adri_tools_v2] 1.0.0
-|   |   |   |-- [ESP8266WiFi] 1.0
-|   |   |   |-- [LittleFS(esp8266)] 0.1.0
 |   |-- [ADRIIOT_RGBneo] 1.0.0
 |   |   |-- [Adafruit NeoPixel] 1.7.0
 |   |   |-- [ArduinoJson] 6.17.1
-|   |-- [adriiot_solMoisture] 1.0.0
+|   |-- [ADRIIOT_solMoisture] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |-- [adri_logger] 1.0.0
 |   |   |-- [adri_tools_v2] 1.0.0
@@ -316,13 +313,13 @@ Librairies
 <details>
 ALS_espwebserver                = https://github.com/AdriLighting/ALS_espwebserver
 
-adriiot                         = https://github.com/AdriLighting/ADRIOT
-adriiot_dht22                   = https://github.com/AdriLighting/ADRIOT_dht22
-adriiot_DS18B20                 = https://github.com/AdriLighting/adriot_DS18B20
+ADRIIOT                         = https://github.com/AdriLighting/ADRIIOT
+ADRIIOT_dht22                   = https://github.com/AdriLighting/ADRIIOT_dht22
+ADRIIOT_DS18B20                 = https://github.com/AdriLighting/ADRIIOT_DS18B20
 ADRIIOT_lightDimmer             = https://github.com/AdriLighting/ADRIIOT_lightDimmer
-adriiot_relay                   = https://github.com/AdriLighting/ADRIOT_relay
+ADRIIOT_relay                   = https://github.com/AdriLighting/ADRIIOT_relay
 ADRIIOT_RGBneo                  = https://github.com/AdriLighting/ADRIIOT_RGBneo
-adriiot_solMoisture             = https://github.com/AdriLighting/ADRIOT_solMoisture
+ADRIIOT_solMoisture             = https://github.com/AdriLighting/ADRIIOT_solMoisture
 
 adri_tools_v2_serialMenu        = https://github.com/AdriLighting/adri_tools_v2_serialMenu
 adri_tools_v2                   = https://github.com/AdriLighting/adri_tools_v2
@@ -368,7 +365,7 @@ Dependency Graph
 |   |-- [SPI] 1.0
 |-- [Wire] 1.0
 |-- [Adafruit Unified Sensor] 1.1.4
-|-- [adriiot] 1.0.0
+|-- [ADRIIOT] 1.0.0
 |   |-- [JsonStreamingParser] 1.0.5
 |   |-- [adri_tools_v2] 1.0.0
 |   |   |-- [ESP8266WiFi] 1.0
@@ -463,26 +460,23 @@ Dependency Graph
 |   |   |   |-- [SPI] 1.0
 |   |   |-- [Wire] 1.0
 |   |   |-- [SPI] 1.0
-|   |-- [adriiot_dht22] 1.0.0
+|   |-- [ADRIIOT_dht22] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DHT sensor library] 1.4.1
 |   |   |   |-- [Adafruit Unified Sensor] 1.1.4
-|   |-- [adriiot_DS18B20] 1.0.0
+|   |-- [ADRIIOT_DS18B20] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |   |-- [DallasTemperature] 3.9.0
 |   |   |   |-- [OneWire] 2.3.5
 |   |   |-- [OneWire] 2.3.5
 |   |-- [ADRIIOT_lightDimmer] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
-|   |-- [adriiot_relay] 1.0.0
+|   |-- [ADRIIOT_relay] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
-|   |   |-- [adri_tools_v2] 1.0.0
-|   |   |   |-- [ESP8266WiFi] 1.0
-|   |   |   |-- [LittleFS(esp8266)] 0.1.0
 |   |-- [ADRIIOT_RGBneo] 1.0.0
 |   |   |-- [Adafruit NeoPixel] 1.7.0
 |   |   |-- [ArduinoJson] 6.17.1
-|   |-- [adriiot_solMoisture] 1.0.0
+|   |-- [ADRIIOT_solMoisture] 1.0.0
 |   |   |-- [ArduinoJson] 6.17.1
 |   |-- [adri_logger] 1.0.0
 |   |   |-- [adri_tools_v2] 1.0.0
