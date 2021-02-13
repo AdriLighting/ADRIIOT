@@ -15,6 +15,12 @@
 	#endif
 	#include <adri_tools_v2.h>
 
+	#ifdef ADRIOTOOLS_USETELNET
+		#include <adri_tools_v2_telnet.h>
+	#endif
+	
+	#include <adri_tools_v2_serialMenu.h>
+
 	#include <adriiot_soilmoisture.h>
 	#include <adriiot_relay.h>
 	#include <adriiot_dht22.h>

@@ -1,8 +1,5 @@
 ADC_MODE(ADC_VCC); 		// FOR TEST AS SENSOR MODULE
 
-#include <Adafruit_Sensor.h>
-// #include <adri_tools_v2_serialMenu.h>
-
 
 #define ADRIOTOOLS_USETELNET
 
@@ -188,7 +185,7 @@ void setup()
 
 		_tft_ui = new tft_ui();
 
-		adriTFTscreen_set_pos(1);
+		adriTFTscreen_set_pos(0);
 		adriTFTscreen_display();
 			
 		new adriiot_tft_home();	

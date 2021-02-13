@@ -105,7 +105,7 @@ adriiot_tft_home::adriiot_tft_home(){
 		_txtBoxValue[i]->textColor(ui.color565(255, 119, 0), _color_home_1_bgClock);
 		_txtBoxValue[i]->u8g2_mod(1);
 		_txtBoxValue[i]->u8g2_font(font_default);
-		_txtBoxValue[i]->text("_txtBoxValue[i]");
+		_txtBoxValue[i]->text("value");
 		_txtBoxValue[i]->u8g2_setup();				
 	}	
 	init();
@@ -146,8 +146,6 @@ void adriiot_tft_home::init(){
 
 // region ################################################ HOME update
 void adriiot_tft_home::update(int i){
-	fsprintf("\n%s\n",adriTFTscreen_get_name());
-			// if (adriTFTscreen_get_name() != (const char*)"home") return;
 			int pos = -1;
 			adriTFTscreen_get_pos(pos);
 			if (pos != _pos) return;
@@ -228,9 +226,7 @@ void adriiot_tft_device::init(){
 // 
 // region ################################################ DEVICE UPDATE
 void adriiot_tft_device::update(int i){
-
 			int pos = -1;
-
 			adriTFTscreen_get_pos(pos);
 
 			if (pos != _pos) return;

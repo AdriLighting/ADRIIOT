@@ -322,8 +322,10 @@
 #endif
 // endregion >>>> TFT DEVICE
 void adriiot_tft_update(int pos) {
-	adriiot_tft_device_ptr->update(pos);
-	adriiot_tft_home_ptr->update(pos);
+	#if ADRIIOT_TFT==ADRIIOT_TFTILI9341
+		adriiot_tft_device_ptr->update(pos);
+		adriiot_tft_home_ptr->update(pos);
+	#endif
 }
 
 
