@@ -58,7 +58,6 @@ Creation of a set of libraries for the use of IOT module .<br />
 </br>
 <hr>
 </br>
-
 <pre>
 Librairies
 <details>
@@ -112,13 +111,13 @@ ESP8266mDNS                     =
 ArduinoOTA                      = 
 Hash                            = 
 Ethernet(esp8266)               = 
+SD(esp8266)                     = 
+SDFS                            = 
+ESP8266SdFat                    = 
 
 unregisterd lib:
 JsonStreamingParser = 
 ESPAsyncTCP = 
-SD(esp8266) = 
-SDFS = 
-ESP8266SdFat = 
 </details>
 Dependency Graph
 <details>
