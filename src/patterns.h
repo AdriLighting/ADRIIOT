@@ -45,7 +45,8 @@
 	#else
 		void heapStatsPatternLoop_print(String & ret);
 	#endif
-		void heapStats_print();
+
+	void heapStats_print();
 
 
 
