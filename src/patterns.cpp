@@ -15,111 +15,111 @@ uint32_t pInitHeap;
 	int heap_newPos = -1;
 	int heap_pass = 0;
 
-void pattern_list::heapStats_print(){
-	arp_fsprintf("\n[pattern_list::heapStats_print]\n");
-	String 		s;
-	String 		pName;
-	uint32_t 	tMax 	= 0;
-	uint32_t 	tMin 	= 0;
-	uint32_t 	tTime 	= 0;
-	uint32_t 	tIte 	= 0;
-	for (int i = 0; i < _maxcnt; i++) { 
-		heap_stats * p = heapStatArray[i];
-		heap_stats_get(p, "", s);
-		if(p->_heap_total 	> 0) tMax 	+= p->_heap_total;
-		if(p->_timer_total	> 0) tTime 	+= p->_timer_total;
-		if(p->_iteration 	> 0) tIte 	+= p->_iteration;
-		arp_fsprintf("%s\n", s.c_str());
-	}	
+	void pattern_list::heapStats_print(){
+		arp_fsprintf("\n[pattern_list::heapStats_print]\n");
+		String 		s;
+		String 		pName;
+		uint32_t 	tMax 	= 0;
+		uint32_t 	tMin 	= 0;
+		uint32_t 	tTime 	= 0;
+		uint32_t 	tIte 	= 0;
+		for (int i = 0; i < _maxcnt; i++) { 
+			heap_stats * p = heapStatArray[i];
+			heap_stats_get(p, "", s);
+			if(p->_heap_total 	> 0) tMax 	+= p->_heap_total;
+			if(p->_timer_total	> 0) tTime 	+= p->_timer_total;
+			if(p->_iteration 	> 0) tIte 	+= p->_iteration;
+			arp_fsprintf("%s\n", s.c_str());
+		}	
 
-	static 	int tcnt 	= 0;
-	static 	int ttot 	= 0;
-	static	int tused 	= 0;
-			if (pInitHeap > ESP.getFreeHeap()) 	tused = (pInitHeap - ESP.getFreeHeap());
-	static	int trest 	= 0;
-			if (ESP.getFreeHeap() > tMax) 		trest = (ESP.getFreeHeap() - tMax);
-			tcnt++;
-			ttot+=tused;
-	arp_fsprintf("[TOTAL] ite:%5d heap-total:%7d heap-rest:%7d heap-moy:%7d - heap-used:%7d |%d/%d|%d| init:%7d free:%7d duration:%5s\n",
-		tIte,
-		tMax,
-		trest,
-		tMax/tIte,
-		tused,
-		ttot,
-		tcnt,
-		ttot/tcnt,
-		pInitHeap,
-		ESP.getFreeHeap(),
-		on_time(tTime).c_str()
-	);
+		static 	int tcnt 	= 0;
+		static 	int ttot 	= 0;
+		static	int tused 	= 0;
+				if (pInitHeap > ESP.getFreeHeap()) 	tused = (pInitHeap - ESP.getFreeHeap());
+		static	int trest 	= 0;
+				if (ESP.getFreeHeap() > tMax) 		trest = (ESP.getFreeHeap() - tMax);
+				tcnt++;
+				ttot+=tused;
+		arp_fsprintf("[TOTAL] ite:%5d heap-total:%7d heap-rest:%7d heap-moy:%7d - heap-used:%7d |%d/%d|%d| init:%7d free:%7d duration:%5s\n",
+			tIte,
+			tMax,
+			trest,
+			tMax/tIte,
+			tused,
+			ttot,
+			tcnt,
+			ttot/tcnt,
+			pInitHeap,
+			ESP.getFreeHeap(),
+			on_time(tTime).c_str()
+		);
 
-}
+	}
 
-heap_stats::heap_stats(String name){
-	_initial 		= ESP.getFreeHeap();
-	_name 			= name;
-}
-void heap_stats::start(){
-	_heap_befor 	= ESP.getFreeHeap();
-	_timer_befor 	= millis();	
-}
-void heap_stats::end(){
-		_heap_after 	= ESP.getFreeHeap() ;
+	heap_stats::heap_stats(String name){
+		_initial 		= ESP.getFreeHeap();
+		_name 			= name;
+	}
+	void heap_stats::start(){
+		_heap_befor 	= ESP.getFreeHeap();
+		_timer_befor 	= millis();	
+	}
+	void heap_stats::end(){
+			_heap_after 	= ESP.getFreeHeap() ;
 
-		// if (_iteration > 0) { // no calculation 1st time, because time between init and 1st run may be very long
+			// if (_iteration > 0) { // no calculation 1st time, because time between init and 1st run may be very long
 
 
-			int curr=0;
+				int curr=0;
 
-			if (_heap_befor > _heap_after) curr = _heap_befor-_heap_after;
-			else {
-			// if(_iteration>0) curr = _heap_last;
-			}
+				if (_heap_befor > _heap_after) curr = _heap_befor-_heap_after;
+				else {
+				// if(_iteration>0) curr = _heap_last;
+				}
 
-			_heap_last 	= curr;
+				_heap_last 	= curr;
 
-			_heap_total += curr;
+				_heap_total += curr;
 
-			// arp_fsprintf("\n_name : %s\n", _name.c_str());
-			// arp_fsprintf("_heap_befor : %d\n", _heap_befor);
-			// arp_fsprintf("_heap_after : %d\n", _heap_after);
-			// arp_fsprintf("curr : %d\n", curr);
-			// arp_fsprintf("_heap_total : %d\n", _heap_total);
-			// 
-			// if (_iteration>0) {
-			// 
-				if (_heap_total>0) _heap_moy = _heap_total / (_iteration+1);
+				// arp_fsprintf("\n_name : %s\n", _name.c_str());
+				// arp_fsprintf("_heap_befor : %d\n", _heap_befor);
+				// arp_fsprintf("_heap_after : %d\n", _heap_after);
+				// arp_fsprintf("curr : %d\n", curr);
+				// arp_fsprintf("_heap_total : %d\n", _heap_total);
+				// 
+				// if (_iteration>0) {
+				// 
+					if (_heap_total>0) _heap_moy = _heap_total / (_iteration+1);
 
-				if (curr>_heap_max)					_heap_max=curr;
-				if ((curr>0) && (curr<_heap_max)) 	_heap_min=curr;			
+					if (curr>_heap_max)					_heap_max=curr;
+					if ((curr>0) && (curr<_heap_max)) 	_heap_min=curr;			
+				// }
+
+
+				_timer_duration = millis() - _timer_befor;
+				_timer_total += _timer_duration;		
 			// }
 
+			_iteration++;	
+	}
 
-			_timer_duration = millis() - _timer_befor;
-			_timer_total += _timer_duration;		
-		// }
-
-		_iteration++;	
-}
-
-void heap_stats_get(heap_stats * heap_stat, String _name, String & value) {
-	char buf[200];
-	sprintf(buf, "%-40s\tite:%5d befor:%5d after:%5d\t heap [mean:%5d min:%5d max:%5d last:%5d] - duration [last:%10s total:%10s] init : %5d",
-		heap_stat->_name.c_str(), 
-		heap_stat->_iteration, 
-		heap_stat->_heap_befor, 
-		heap_stat->_heap_after, 
-		heap_stat->_heap_moy,
-		heap_stat->_heap_min,
-		heap_stat->_heap_max,
-		heap_stat->_heap_last,
-		on_time(heap_stat->_timer_duration).c_str(),
-		on_time(heap_stat->_timer_total).c_str(),
-		heap_stat->_initial
-	);	
-	value = String(buf);
-}
+	void heap_stats_get(heap_stats * heap_stat, String _name, String & value) {
+		char buf[200];
+		sprintf(buf, "%-40s\tite:%5d befor:%5d after:%5d\t heap [mean:%5d min:%5d max:%5d last:%5d] - duration [last:%10s total:%10s] init : %5d",
+			heap_stat->_name.c_str(), 
+			heap_stat->_iteration, 
+			heap_stat->_heap_befor, 
+			heap_stat->_heap_after, 
+			heap_stat->_heap_moy,
+			heap_stat->_heap_min,
+			heap_stat->_heap_max,
+			heap_stat->_heap_last,
+			on_time(heap_stat->_timer_duration).c_str(),
+			on_time(heap_stat->_timer_total).c_str(),
+			heap_stat->_initial
+		);	
+		value = String(buf);
+	}
 #else
 	void heapStatsPatternLoop_print(String & ret){
 		// arp_fsprintfs("\n[heapStatsPatternLoop_print]\n");
@@ -146,7 +146,7 @@ void heap_stats_get(heap_stats * heap_stat, String _name, String & value) {
 #endif
 
 void heapStats_print(){
-	arp_fsprintf("\n[heapStatsPatternLoop_print]\n");
+	arp_fsprintf("\n[heapStats_print]\n");
 
 	static	int tused 	= 0;
 			if (pInitHeap > ESP.getFreeHeap()) 	tused = (pInitHeap - ESP.getFreeHeap());
