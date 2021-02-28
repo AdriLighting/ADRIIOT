@@ -23,6 +23,7 @@ void moduleManagment::create_lightDimmer 	(int pin, String username, int idx){cr
 void moduleManagment::create_temperature 	(int pin, String username, int idx){create(mn_sensor, 	mt_sensor,		rt_unk, 	st_dht22, 		pin, username, idx);}
 void moduleManagment::create_temperatureEx	(int pin, String username, int idx){create(mn_sensor, 	mt_sensor,		rt_unk, 	st_ds18b20,		pin, username, idx);}
 void moduleManagment::create_plug 			(int pin, String username, int idx){create(mn_relay, 	mt_relay,		rt_plug, 	st_unk, 		pin, username, idx);}
+void moduleManagment::create_plugWater		(int pin, String username, int idx){create(mn_relay, 	mt_relay,		rt_waterPump, 	st_unk, 		pin, username, idx);}
 void moduleManagment::create_light 			(int pin, String username, int idx){create(mn_relay, 	mt_relay, 		rt_light, 	st_unk, 		pin, username, idx);}
 void moduleManagment::create_light 			(mType type, int pin, String username, int idx){	
 																				create(mn_light, 	type,			rt_unk, 	st_unk, 		pin, username, idx);}
@@ -284,6 +285,7 @@ void moduleManagment::rTypeToString(mRelayType value, String & result){
 	switch (value) {
 	    case rt_light:			result = "luminaire";					break;
 	    case rt_plug: 			result = "prise de courrant";			break;
+	    case rt_waterPump:		result = "pompe a";			break;
 	    default: 				result = "";							break;
 	}
 }
@@ -366,6 +368,7 @@ void moduleManagment::json_mType(String & ret){
 mRelayType rTypeArray[] { 
     rt_light,
     rt_plug,
+    rt_waterPump,
     rt_unk
 };
 void moduleManagment::jsonObject_rtype(JsonObject & object){
@@ -399,6 +402,7 @@ mSensorType sensorTypeArray[] {
     st_soilmoisture,
     st_dht22,
     st_ds18b20,
+    st_acs712,
     st_unk
 };
 void moduleManagment::jsonObject_stype(JsonObject & object){
@@ -438,7 +442,7 @@ void moduleManagment::json_sType(String & ret){
 void moduleManagment::modulesValue_check(){
 	if (modulesValue_checkTimer->loop()) {
 
-		if (modulesValue_checkTimer->_duration_max != 1000) modulesValue_checkTimer->set_duration_max(1000);
+		if (modulesValue_checkTimer->_duration_max != 3000) modulesValue_checkTimer->set_duration_max(3000);
 
 		const size_t serializeSize = 512 ;	
 		int 		id;
@@ -589,9 +593,11 @@ void adriiot_domoticz::update_module(DynamicJsonDocument oject, int debug){
 
 		if (moduleClassArray[i]->_mqttidx == idx) {
 
-			int 		id;
+			int 			id;
 			mSensorType 	sType;
-			mType 		moduleType;
+			mType 			moduleType;
+			mRelayType		relayType;
+			moduleClassArray[i]->rType_get(relayType);
 			moduleClassArray[i]->mType_get(moduleType);
 			moduleClassArray[i]->sType_get(sType);
 			moduleClassArray[i]->id_get(id);
@@ -614,12 +620,27 @@ void adriiot_domoticz::update_module(DynamicJsonDocument oject, int debug){
 			    	}
 			    break;
 			    case mt_relay:
+		    
 			    	switch (nValue) {
 			    	    case 0:
 			    	    	adriiot_mainPtr->_relayManagment->module(id)->close();
+					    	switch (relayType) {
+					    		case rt_waterPump:
+					    		adriiot_mainPtr->_moduleManagment->module(id)->_waterPumpSatu = wps_auto;
+					    		break;
+					    		default:
+					    			break;	    		
+					    	}	
 			    	    break;
 			    	    case 1:
 			    	    	adriiot_mainPtr->_relayManagment->module(id)->open();
+					    	switch (relayType) {
+					    		case rt_waterPump:
+					    		adriiot_mainPtr->_moduleManagment->module(id)->_waterPumpSatu = wps_manu;	
+					    		break;
+					    		default:
+					    			break;	    		
+					    	}				    	    	
 			    	    break;
 			    	    default:
 			    	    	break;

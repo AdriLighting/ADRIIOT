@@ -79,6 +79,9 @@ void moduleClass::print(){
 	    		case rt_plug:
 					adriiot_mainPtr->_relayManagment->module(_id)->getStatus(state);
 	    		break;
+	    		case rt_waterPump:
+					adriiot_mainPtr->_relayManagment->module(_id)->getStatus(state);
+	    		break;	    		
 	    		default:
 	    			break;
 
@@ -190,6 +193,11 @@ void moduleClass::json_domoticz_value(JsonObject & object){
 	    			object[F("command")] = F("switchlight");
 					adriiot_mainPtr->_relayManagment->module(_id)->domoticzJson(object);	
 	    		break;
+	    		case rt_waterPump:
+	    			object[F("command")] = F("switchlight");
+					adriiot_mainPtr->_relayManagment->module(_id)->domoticzJson(object);	
+	    		break;
+	    		
 	    		case rt_light:
 	    			object[F("command")] = F("switchlight");
 					adriiot_mainPtr->_relayManagment->module(_id)->domoticzJson(object);	    		

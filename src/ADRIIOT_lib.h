@@ -10,9 +10,9 @@
 	#if ADRIOTOOLS_USELOGGER==1
 		#include <adri_logger.h>
 	#endif
-	#if ADRIOTOOLS_USELOGGER==2
-		#include <adri_soft_logger.h>
-	#endif
+	// #if ADRIOTOOLS_USELOGGER==2
+	// 	#include <adri_soft_logger.h>
+	// #endif
 	#include <adri_tools_v2.h>
 
 	#ifdef ADRIOTOOLS_USETELNET

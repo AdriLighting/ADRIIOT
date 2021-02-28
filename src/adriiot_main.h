@@ -37,6 +37,7 @@
 		enum mRelayType{
 			rt_light,
 			rt_plug,
+			rt_waterPump,
 			rt_unk
 		};
 		/**
@@ -46,6 +47,7 @@
 			st_soilmoisture,
 			st_dht22,
 			st_ds18b20,
+			st_acs712,
 			st_unk
 		};	
 
@@ -54,7 +56,12 @@
 			mp_domoticz,
 			mp_none
 
-		};		
+		};	
+
+		enum mWaterPumpSatu
+		{
+			wps_auto, wps_manu, wps_off
+		};			
 // endregion >>>> mod	
 
 // region ################################################ moduleClass
@@ -72,6 +79,8 @@
 		public:
 			int 		_mqttidx	= -1;
 			int 		_numLeds	= -1;
+
+			mWaterPumpSatu _waterPumpSatu = wps_auto;
 
 			moduleClass(mModule mName, mType moType, mRelayType rType, mSensorType sType, int pin, int numLeds, String username);
 			moduleClass(mModule name, mType module_type, mRelayType relay_type, mSensorType sType, int pin, String username);
@@ -113,11 +122,14 @@
 		public:
 			int _pos = 0;
 
+
+
 			moduleManagment();
 			~moduleManagment(){};
 
 			boolean modulesValue_check_skip = false;
 			String modulesValue[MAX_MODULE];
+
 			void modulesValue_check();
 			adri_timer * modulesValue_checkTimer;
 
@@ -131,6 +143,7 @@
 			void create_temperature		(int pin, String username, int idx = -1);
 			void create_temperatureEx	(int pin, String username, int idx = -1);
 			void create_plug 			(int pin, String username, int idx = -1);
+			void create_plugWater		(int pin, String username, int idx = -1);
 			void create_light 			(int pin, String username, int idx = -1);
 			void create_light 			(mType type, int pin, String username, int idx = -1);
 			void create_sensor			(mSensorType type, int pin, String username, int idx = -1);

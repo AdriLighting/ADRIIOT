@@ -1,11 +1,11 @@
-ADC_MODE(ADC_VCC); 		// FOR TEST AS SENSOR MODULE
+// ADC_MODE(ADC_VCC); 		// FOR TEST AS SENSOR MODULE
 
 
 #define ADRIOTOOLS_USETELNET
 
 #define ADRIIOT_TFTILI9341 	1
 #define ADRIIOT_TFTOLED 	2
-#define ADRIIOT_TFT 		1
+#define ADRIIOT_TFT 		0
 
 #define ADRIIOT_MQTT 	1
 #define ADRIIOTMQTT		ADRIIOT_MQTT
@@ -30,6 +30,8 @@ adri_toolsV2 			* _tools;
 adri_timer 				* timerCloud;
 
 int 					setup_id = -1;	
+int 					pump_id = -1;	
+int 					soil_id = -1;	
 
 #ifdef ADRIOTOOLS_USETELNET
 adri_telnet * _adri_telnet;	
@@ -39,7 +41,6 @@ adri_telnet * _adri_telnet;
 tft_ui * _tft_ui;
 #endif
 // endregion >>>> PTR
-
 
 
 void setup()
@@ -137,7 +138,7 @@ void setup()
 //					adriiot_spiff->load(json); 																											// CREATE FROM JSON FILE
 //	
 //											STRIP RGB/RGBW Drived by Adafruit neopixel	
-	adriiotMain->_moduleManagment->create_lightRGB(		4,10,	"ruban led rgb",	7		); 															// 1 |LEDS BUIT-IN BLUE
+	adriiotMain->_moduleManagment->create_lightRGB(		D2,10,	"ruban led rgb",	7		); 															// 1 |LEDS BUIT-IN BLUE
 	                                            		  		            		 		   															// 				
 //											RELAY POUR CONTROLLER UN ECLAIRAGE 0/220	
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led",			1); 			// 0 |CREATE WITH MOD
@@ -148,20 +149,23 @@ void setup()
 	adriiotMain->_moduleManagment->create_lightDimmer(	16,		"red_led",  		2		); 															// 1 |LEDS BUIT-IN RED	
 
 // 											CAPTEUR DE TYPE ANALOG POUR HUMIDITÉE DU SOL
-	// adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_soilmoisture, 	A0,		"ADC", 		5);						// 0 |ESP.getvcc()
+	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_soilmoisture, 	A0,		"ADC", 		8);						// 0 |ESP.getvcc()
+	adriiotMain->_moduleManagment->getIdByName("ADC", soil_id);	                                           			    	                  	 		   	 														// 
 
 // 											CAPTEUR DE TYPE DHT22 POUR LA TEMPÉRATURE ET L'HUMIDITÉE
 //	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_dht22, 			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
 	// adriiotMain->_moduleManagment->create_temperature(	4,		"chambre d'adri", 	3 		); 															// 1 |DHT22
 	                                                 	   		                  	  		   															// 
 //	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_ds18b20,			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_temperatureEx(5,		"ds2812b", 			6 		); 															// 1 |DS18B20 	
+	adriiotMain->_moduleManagment->create_temperatureEx(D1,		"ds2812b", 			6 		); 															// 1 |DS18B20 	
 
 // 											RELAY POUR CONTROLLER UNE PRISE 0/220
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_plug, 		st_unk, 			D5,		"prise",			4);				// 0 |CREATE WITH MOD
-	adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a café",	4		); 	 														// 1 |NULL
-	adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a bobnbon",	4		); 	 														// 1 |NULL
-	adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a biére",	4		); 	 														// 1 |NULL
+	adriiotMain->_moduleManagment->create_plugWater(			D3, 	"pump",				4		); 	 														// 1 |NULL
+	adriiotMain->_moduleManagment->getIdByName("pump", pump_id);	                                           			    	                  	 		   	 														// 
+	
+	// adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a bobnbon",	4		); 	 														// 1 |NULL
+	// adriiotMain->_moduleManagment->create_plug(			D6, 	"machinne a biére",	4		); 	 														// 1 |NULL
 // endregion >>>> MODULES
 
 // region ################################################ wificonnect
@@ -199,12 +203,13 @@ void setup()
 	#endif
 // endregion >>>> tft
 
-	timerCloud = new adri_timer(60000, "", true)	;
+	timerCloud = new adri_timer(250, "", true)	;
 
 	_tools->heap_print();
 }
 
-
+boolean arroseMoi = false;
+boolean jeTarrose = false;
 void loop()
 {
 
@@ -221,8 +226,20 @@ void loop()
 		// 	adriiot_tft_update(i);
 		// }		
 		// adriToolsLogger_ptrGet()->activateByRegion_toggleAddLine(0);
-
+		// 
+		if (adriiotMain->_moduleManagment->module(pump_id)->_waterPumpSatu == wps_auto) {
+			adriiotMain->_soilmoistureManagment->module(soil_id)->loop(arroseMoi);	
+			if (arroseMoi) {
+				adriiotMain->_relayManagment->module(pump_id)->getStatus(jeTarrose);	
+				if (!jeTarrose) adriiotMain->_relayManagment->module(pump_id)->open();
+			} else {
+				adriiotMain->_relayManagment->module(pump_id)->getStatus(jeTarrose);	
+				if (jeTarrose) adriiotMain->_relayManagment->module(pump_id)->close();		
+			}			
+		}	
 	}
+
+
 
 	_serial->loop();
 
