@@ -203,13 +203,14 @@ void setup()
 	#endif
 // endregion >>>> tft
 
-	timerCloud = new adri_timer(250, "", true)	;
+	timerCloud = new adri_timer(100, "", true)	;
 
 	_tools->heap_print();
 }
 
 boolean arroseMoi = false;
 boolean jeTarrose = false;
+boolean jeTarroseUpd = false;
 void loop()
 {
 
@@ -227,15 +228,20 @@ void loop()
 		// }		
 		// adriToolsLogger_ptrGet()->activateByRegion_toggleAddLine(0);
 		// 
+		// 
 		if (adriiotMain->_moduleManagment->module(pump_id)->_waterPumpSatu == wps_auto) {
 			adriiotMain->_soilmoistureManagment->module(soil_id)->loop(arroseMoi);	
 			if (arroseMoi) {
-				adriiotMain->_relayManagment->module(pump_id)->getStatus(jeTarrose);	
-				if (!jeTarrose) adriiotMain->_relayManagment->module(pump_id)->open();
+				// adriiotMain->_relayManagment->module(pump_id)->getStatus(jeTarrose);	
+				// if (!jeTarrose) {
+					if (!jeTarroseUpd) {fsprintf("\n[ARROSE]\n"); adriiotMain->_relayManagment->module(pump_id)->open();jeTarroseUpd=true;delay(500);}
+					// if (timerCloud->loop()) adriiotMain->_moduleManagment->modulesValue_check(true);
+				// }
 			} else {
 				adriiotMain->_relayManagment->module(pump_id)->getStatus(jeTarrose);	
-				if (jeTarrose) adriiotMain->_relayManagment->module(pump_id)->close();		
-			}			
+				if (jeTarroseUpd) {fsprintf("\n[ARROSE PAS]\n"); adriiotMain->_relayManagment->module(pump_id)->close();jeTarroseUpd=false;delay(500);	}	
+				// if (timerCloud->loop()) adriiotMain->_moduleManagment->modulesValue_check(true);
+			}
 		}	
 	}
 

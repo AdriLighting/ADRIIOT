@@ -439,10 +439,14 @@ void moduleManagment::json_sType(String & ret){
 // 	###########################################################################
 
 // region ################################################ UPDATE MODULE VALUE TO SOCKET && MQTT
-void moduleManagment::modulesValue_check(){
-	if (modulesValue_checkTimer->loop()) {
 
-		if (modulesValue_checkTimer->_duration_max != 3000) modulesValue_checkTimer->set_duration_max(3000);
+void moduleManagment::modulesValue_check(boolean force){
+	if (!force) {
+		if (!modulesValue_checkTimer->loop()) return;
+	}
+	
+
+		if (modulesValue_checkTimer->_duration_max != 3500) modulesValue_checkTimer->set_duration_max(3500);
 
 		const size_t serializeSize = 512 ;	
 		int 		id;
@@ -563,7 +567,6 @@ void moduleManagment::modulesValue_check(){
 				}
 			}
 		}	
-	}
 }	
 // endregion >>>> UPDATE MODULE VALUE TO SOCKET && MQTT
 
