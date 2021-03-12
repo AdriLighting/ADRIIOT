@@ -1,4 +1,3 @@
-// ADC_MODE(ADC_VCC); 		// FOR TEST AS SENSOR MODULE
 
 
 #define ADRIOTOOLS_USETELNET
@@ -363,8 +362,6 @@ String _serial_screenNext(String cmd, String value){
 
 
 /*
-
-
 // region ################################################ MODULES
 	// 	INITIALISATION DES MODULES POUR TEST (10MODULES MAX)
 	// 								PARAM :
@@ -383,24 +380,19 @@ String _serial_screenNext(String cmd, String value){
 //											RELAY POUR CONTROLLER UN ECLAIRAGE 0/220	
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_light,		st_unk, 			2,		"blue_led",			1); 			// 0 |CREATE WITH MOD
 	adriiotMain->_moduleManagment->create_light(		2,		"blue_led", 		1		); 															// 1 |LEDS BUIT-IN BLUE
-
 // 											CONTROLLER UN ECLAIRAGE AVEC VARIATION DE LA LUMINOSITÉE PAR RELAY 
 //	adriiotMain->_moduleManagment->create(	mn_light, 	mt_lightDimmer,	rt_unk,			st_unk, 			16,		"red_led",			2); 			// 0 |CREATE WITH MOD
 	adriiotMain->_moduleManagment->create_lightDimmer(	16,		"red_led",  		2		); 															// 1 |LEDS BUIT-IN RED	
-
 // 											CAPTEUR DE TYPE ANALOG POUR HUMIDITÉE DU SOL
 	// adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_soilmoisture, 	A0,		"ADC", 		5);						// 0 |ESP.getvcc()
-
 // 											CAPTEUR DE TYPE DHT22 POUR LA TEMPÉRATURE ET L'HUMIDITÉE
 //	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_dht22, 			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
 	adriiotMain->_moduleManagment->create_temperature(	4,		"chambre d'adri", 	3 		); 															// 1 |DHT22
 	                                                 	   		                  	  		   															// 
 //	adriiotMain->_moduleManagment->create(	mn_sensor, 	mt_sensor, 		rt_unk, 		st_ds18b20,			5,		"chambre d'adri",	3);				// 0 |CREATE WITH MOD
 	adriiotMain->_moduleManagment->create_temperatureEx(5,		"ds2812b", 			6 		); 															// 1 |DS18B20 	
-
 // 											RELAY POUR CONTROLLER UNE PRISE 0/220
 //	adriiotMain->_moduleManagment->create(	mn_relay, 	mt_relay, 		rt_plug, 		st_unk, 			D5,		"prise",			4);				// 0 |CREATE WITH MOD
 	adriiotMain->_moduleMan
-
-
 */
+

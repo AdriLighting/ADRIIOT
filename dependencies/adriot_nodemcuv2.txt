@@ -1,0 +1,234 @@
+|-- <adri_tools_v2_serialMenu> 1.0.0
+|   |-- <adri_tools_v2> 1.0.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <LittleFS(esp8266)> 0.1.0
+|-- <Adafruit BusIO> 1.4.1
+|   |-- <Wire> 1.0
+|   |-- <SPI> 1.0
+|-- <Wire> 1.0
+|-- <Adafruit Unified Sensor> 1.1.4
+|-- <ADRIIOT> 1.0.0
+|   |-- <adri_wifiConnect> 1.0.0
+|   |   |-- <ESP8266WebServer> 1.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <ESP8266mDNS> 1.2
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <adri_timer> 1.0.0
+|   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <JsonStreamingParser> 1.0.5
+|   |-- <adri_tools_v2> 1.0.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <ESP8266HTTPClient> 1.2
+|   |   |-- <ESP8266WiFi> 1.0
+|   |-- <ESP8266WiFi> 1.0
+|   |-- <adri_ntpTime> 1.0.0
+|   |   |-- <TimeLib> 1.6
+|   |   |-- <ESP8266WiFi> 1.0
+|   |-- <adri_calendar_event> 1.0.0
+|   |   |-- <TimeLib> 1.6
+|   |-- <TimeLib> 1.6
+|   |-- <adri_timer> 1.0.0
+|   |-- <adri_espwebserver> 1.0.0
+|   |   |-- <ArduinoOTA> 1.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <ESP8266mDNS> 1.2
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <ESP8266mDNS> 1.2
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <adri_wifiConnect> 1.0.0
+|   |   |   |-- <ESP8266WebServer> 1.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <ESP8266mDNS> 1.2
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |-- <adri_timer> 1.0.0
+|   |   |-- <ArduinoJson> 6.17.1
+|   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <adri_timer> 1.0.0
+|   |   |-- <ESP8266WebServer> 1.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <WebSockets> 2.3.5
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <ESPAsyncTCP> 1.2.2
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <Ethernet(esp8266)> 1.0.4
+|   |   |   |   |-- <SPI> 1.0
+|   |   |   |-- <SPI> 1.0
+|   |   |   |-- <Hash> 1.0
+|   |   |   |-- <ESP8266WebServer> 1.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <adri_httparseurl> 1.0.0
+|   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <adri_tools_v2_serialMenu> 1.0.0
+|   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <adri_tft_ILI9341> 1.0.0
+|   |   |-- <SPI> 1.0
+|   |   |-- <adri_tft_ILI9341_ESP> 1.0.1
+|   |   |   |-- <Adafruit GFX Library> 1.10.2
+|   |   |   |   |-- <Adafruit BusIO> 1.4.1
+|   |   |   |   |   |-- <Wire> 1.0
+|   |   |   |   |   |-- <SPI> 1.0
+|   |   |   |   |-- <Wire> 1.0
+|   |   |   |   |-- <SPI> 1.0
+|   |   |   |-- <SPI> 1.0
+|   |   |-- <Adafruit GFX Library> 1.10.2
+|   |   |   |-- <Adafruit BusIO> 1.4.1
+|   |   |   |   |-- <Wire> 1.0
+|   |   |   |   |-- <SPI> 1.0
+|   |   |   |-- <Wire> 1.0
+|   |   |   |-- <SPI> 1.0
+|   |   |-- <XPT2046> 0.1
+|   |   |   |-- <SPI> 1.0
+|   |   |-- <U8g2_for_Adafruit_GFX> 1.8.0
+|   |   |   |-- <Adafruit GFX Library> 1.10.2
+|   |   |   |   |-- <Adafruit BusIO> 1.4.1
+|   |   |   |   |   |-- <Wire> 1.0
+|   |   |   |   |   |-- <SPI> 1.0
+|   |   |   |   |-- <Wire> 1.0
+|   |   |   |   |-- <SPI> 1.0
+|   |   |-- <JPEGDecoder> 1.8.0
+|   |   |   |-- <SD(esp8266)> 2.0.0
+|   |   |   |   |-- <SDFS> 0.1.0
+|   |   |   |   |   |-- <ESP8266SdFat> 1.1.0
+|   |   |   |   |   |   |-- <SPI> 1.0
+|   |   |   |   |   |-- <SPI> 1.0
+|   |   |   |-- <ESP8266SdFat> 1.1.0
+|   |   |   |   |-- <SPI> 1.0
+|   |   |-- <SD(esp8266)> 2.0.0
+|   |   |   |-- <SDFS> 0.1.0
+|   |   |   |   |-- <ESP8266SdFat> 1.1.0
+|   |   |   |   |   |-- <SPI> 1.0
+|   |   |   |   |-- <SPI> 1.0
+|   |   |-- <SDFS> 0.1.0
+|   |   |   |-- <ESP8266SdFat> 1.1.0
+|   |   |   |   |-- <SPI> 1.0
+|   |   |   |-- <SPI> 1.0
+|   |   |-- <ESP8266SdFat> 1.1.0
+|   |   |   |-- <SPI> 1.0
+|   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <Adafruit GFX Library> 1.10.2
+|   |   |-- <Adafruit BusIO> 1.4.1
+|   |   |   |-- <Wire> 1.0
+|   |   |   |-- <SPI> 1.0
+|   |   |-- <Wire> 1.0
+|   |   |-- <SPI> 1.0
+|   |-- <ADRIIOT_dht22> 1.0.0
+|   |   |-- <ArduinoJson> 6.17.1
+|   |   |-- <DHT sensor library> 1.4.1
+|   |   |   |-- <Adafruit Unified Sensor> 1.1.4
+|   |-- <ADRIIOT_DS18B20> 1.0.0
+|   |   |-- <ArduinoJson> 6.17.1
+|   |   |-- <DallasTemperature> 3.9.0
+|   |   |   |-- <OneWire> 2.3.5
+|   |   |-- <OneWire> 2.3.5
+|   |-- <ADRIIOT_lightDimmer> 1.0.0
+|   |   |-- <ArduinoJson> 6.17.1
+|   |-- <adriiot_relay> 1.0.0
+|   |   |-- <ArduinoJson> 6.17.1
+|   |-- <ADRIIOT_RGBneo> 1.0.0
+|   |   |-- <Adafruit NeoPixel> 1.7.0
+|   |   |-- <ArduinoJson> 6.17.1
+|   |-- <ADRIIOT_soilMoisture> 1.0.0
+|   |   |-- <ArduinoJson> 6.17.1
+|   |-- <adri_logger> 1.0.0
+|   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <adri_tools_v2_serialMenu> 1.0.0
+|   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <adri_tools_v2_telnet> 1.0.0
+|   |   |-- <adri_tools_v2_serialMenu> 1.0.0
+|   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |-- <ALS_espwebserver> 1.0.0
+|   |   |-- <adri_espwebserver> 1.0.0
+|   |   |   |-- <ArduinoOTA> 1.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <ESP8266mDNS> 1.2
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <ESP8266mDNS> 1.2
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <adri_wifiConnect> 1.0.0
+|   |   |   |   |-- <ESP8266WebServer> 1.0
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <ESP8266mDNS> 1.2
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |   |-- <adri_timer> 1.0.0
+|   |   |   |-- <ArduinoJson> 6.17.1
+|   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |-- <adri_timer> 1.0.0
+|   |   |   |-- <ESP8266WebServer> 1.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <WebSockets> 2.3.5
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <ESPAsyncTCP> 1.2.2
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <Ethernet(esp8266)> 1.0.4
+|   |   |   |   |   |-- <SPI> 1.0
+|   |   |   |   |-- <SPI> 1.0
+|   |   |   |   |-- <Hash> 1.0
+|   |   |   |   |-- <ESP8266WebServer> 1.0
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |-- <adri_httparseurl> 1.0.0
+|   |   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |   |   |-- <adri_tools_v2_serialMenu> 1.0.0
+|   |   |   |   |-- <adri_tools_v2> 1.0.0
+|   |   |   |   |   |-- <ESP8266WiFi> 1.0
+|   |   |   |   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <ArduinoJson> 6.17.1
+|   |-- <PubSubClient> 2.8
+|-- <adri_wifiConnect> 1.0.0
+|   |-- <ESP8266WebServer> 1.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |-- <ESP8266WiFi> 1.0
+|   |-- <ESP8266mDNS> 1.2
+|   |   |-- <ESP8266WiFi> 1.0
+|   |-- <adri_tools_v2> 1.0.0
+|   |   |-- <ESP8266WiFi> 1.0
+|   |   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <LittleFS(esp8266)> 0.1.0
+|   |-- <adri_timer> 1.0.0
+|-- <LittleFS(esp8266)> 0.1.0
